@@ -18,8 +18,40 @@ body {
   margin: 0;
   color: #244751;
   background-color: #eee;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+main {
+  width: 450px;
+  height: 100vh;
+  position: relative;
+  padding-top: 120px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #FFFFFF;
+  box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.3);
 }
 
 /*
  * Additional CSS can be defined below or in other CSS files, as per instructions
  */
+
+.center-inline {
+  text-align: center;
+}
+
+.float-left {
+  float: left;
+}
+
+.float-right {
+  float: right;
+}
+
+.group::before,
+.group::after{
+  content: "";
+  display: table;
+  clear: both;
+  overflow: hidden;
+}

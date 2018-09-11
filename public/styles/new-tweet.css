@@ -1,0 +1,32 @@
+h2 {
+  margin: 0 1em 0 1em;
+}
+
+hr {
+  margin: 0 0.5em 1em 0.5em;
+}
+
+form {
+  background-color: #eee;
+  margin: 0 2em;
+  border-color: #a0a0a0;
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 2px;
+  box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.5);
+  
+}
+
+textarea {
+  width: 90%;
+  padding: 0.5em;
+  margin: 1em auto 1em auto;
+}
+
+input {
+  margin: 1em;
+}
+
+span.counter {
+  margin: 1em;
+}

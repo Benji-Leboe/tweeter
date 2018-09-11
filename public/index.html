@@ -6,27 +6,43 @@
 
     <!-- External CSS -->
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+    <meta charset="utf-8" />
     <!-- App CSS -->
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/new-tweet.css" type="text/css" />
 
     <!-- External JS -->
     <script type="text/javascript" src="/vendor/jquery-2.2.3.min.js"></script>
 
     <!-- App JS -->
     <script type="text/javascript" src="/scripts/app.js"></script>
+    <script type="text/javascript" src="/scripts/composer-char-counter.js"></script>
   </head>
 
   <body>
 
     <!-- Top nav bar (fixed) -->
-    <nav id="nav-bar">
-      <img class="logo" src="/images/bird.png" width="80px" height="80px">
-      <span class="header">Tweeter</span>
+    <nav id="nav-bar" class="group">
+      <img class="logo float-left" src="/images/bird.png">
+      <span class="header float-left">Tweeter</span>
     </nav>
 
     <!-- Page-specific (main) content here -->
     <main class="container">
+      <div>
+        <h1 class="center-inline">Welcome to Tweeter!</h1>
+      </div>
+      <section class="new-tweet">
+        <h2>Compose a Tweet</h2>
+        <hr/>
+        <form class="center-inline group" method="POST" action="/tweets/" enctype="application/x-www-form-urlencoded">
+          <textarea id="composer" name="text" placeholder="Whatcha thinkin, twit?"></textarea>
+          <input class="float-left" type="submit" value="Tweet">
+          <span class="counter float-right">140</span>
+        </form>
+      </section>
     </main>
 
   </body>
