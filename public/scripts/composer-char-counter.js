@@ -3,12 +3,11 @@ $(document).ready(function() {
     let value = $(this).val();
     let counter = 140;
     counter -= value.length;
-    if(value.length < 140){
-      //make text red
+    if(counter < 0){
+      $(this).siblings('.counter').replaceWith('<span class="counter text-red float-right">' + counter + '</span>');
+    }else{
+      $(this).siblings('.counter').replaceWith('<span class="counter float-right">' + counter + '</span>');
     }
-    $(this).siblings('.counter').replaceWith('<span class="counter float-right">' + counter + '</span>')
-    
-    console.log(counter);
   });
 });
 

@@ -30,3 +30,7 @@ input {
 span.counter {
   margin: 1em;
 }
+
+.text-red {
+  color: red;
+}
