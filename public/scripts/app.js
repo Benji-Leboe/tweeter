@@ -69,7 +69,8 @@ const tweetArr = [
 
 $(function(){
   composerCount();
-  tweetListener(tweetArr);
+  renderTweets();
+  addTweet();
 });
 
 function composerCount(){
@@ -108,7 +109,11 @@ function createTweetElement(tweetObj) {
   };
 
   let dayMinHr = (function() {
-    if(timeAgo.day) {
+    if(timeAgo.day > 365) {
+      return `${Math.floor(timeAgo.day / 365)} years ago`;
+    } else if (timeAgo.day > 30){
+      return `${Math.floor(timeAgo.day / 30)} months ago`;
+    } else if(timeAgo.day) {
       return `${timeAgo.day} days ago`;
     } else if (timeAgo.hour) {
       return `${timeAgo.hour} hours ago`;      
@@ -137,24 +142,23 @@ function createTweetElement(tweetObj) {
   return $article;
 }
 
-// function tweetListener(tweetObj){
-//   $("#submit-form").on('submit', function(event){
-//     event.preventDefault();
-//     // $("#submit-form").val();
-//     console.log(typeof createTweetElement(tweetObj));
-//     console.dir(createTweetElement(tweetObj));
-//     $(".tweets").prepend(createTweetElement(tweetObj));
-    
-//   });
-// }
 
 
+function renderTweets(){
+    $.ajax('/tweets', {method: 'GET'}).then(function(tweetContent){
+      for(let tweet of tweetContent){
+        $(".tweets").prepend(createTweetElement(tweet));
+      }
+    });
+}
 
-function tweetListener(tweetArr){
-  $("#submit-form").on('submit', function(event){
+function addTweet(){
+  $("#compose-tweet").on('submit', function(event){
     event.preventDefault();
-    for(let tweet of tweetArr){
-      $(".tweets").prepend(createTweetElement(tweet));
-    }
+    content = $('#composer').serialize();
+    $.ajax({url: '/tweets', method: 'POST', data: content}).then(function(){
+      $('#composer').val('');
+    }).done(renderTweets(), function(){
+    });
   });
 }
