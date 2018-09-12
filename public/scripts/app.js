@@ -67,14 +67,14 @@ const tweetArr = [
 ];
 
 
-$(function(){
+$(function() {
   composerCount();
   renderTweets();
   addTweet();
 });
 
-function composerCount(){
-  $("#composer").on('input', function(){
+function composerCount() {
+  $("#composer").on('input', function() {
     let value = $(this).val();
     let counter = 140;
     counter -= value.length;
@@ -144,21 +144,22 @@ function createTweetElement(tweetObj) {
 
 
 
-function renderTweets(){
-    $.ajax('/tweets', {method: 'GET'}).then(function(tweetContent){
-      for(let tweet of tweetContent){
-        $(".tweets").prepend(createTweetElement(tweet));
-      }
-    });
+function renderTweets() {
+  $.ajax('/tweets', {method: 'GET'}).then(function(tweetContent) {
+    for(let tweet of tweetContent) {
+      $(".tweets").prepend(createTweetElement(tweet));
+    }
+  });
 }
 
-function addTweet(){
-  $("#compose-tweet").on('submit', function(event){
+function addTweet() {
+  $("#compose-tweet").on('submit', function(event) {
     event.preventDefault();
     content = $('#composer').serialize();
-    $.ajax({url: '/tweets', method: 'POST', data: content}).then(function(){
+    $.ajax({ url: '/tweets', method: 'POST', data: content }).then(function() {
       $('#composer').val('');
-    }).done(renderTweets(), function(){
+    }).done(renderTweets(), function() {
+      console.log('Post request successful')
     });
   });
 }
