@@ -36,34 +36,18 @@
         <h1 class="center-inline">Welcome to Tweeter!</h1>
       </div>
       <section class="new-tweet">
-        <form class="center-inline group" method="POST" action="/tweets/" enctype="application/x-www-form-urlencoded">
+
+        <form id="submit-form" class="center-inline group" method="POST" action="/tweets/" >
           <h2>Compose a Tweet</h2>
           <hr class="compose-rule"/>
           <textarea id="composer" name="text" placeholder="Whatcha thinkin, twit?"></textarea>
           <input class="float-left" type="submit" value="Tweet">
           <span class="counter float-right">140</span>
         </form>
+        
       </section>
-      <section class="tweets">
-          <article class="tweet-article">
-              <header class="tweet-header group">
-                <img class="tweet-img float-left" src="https://vanillicon.com/788e533873e80d2002fa14e1412b4188_50.png">
-                <h3 class="tweet-name float-left">Name</h3>
-                <p class="tweet-username float-right">@username</p>
-              </header>
-              <p class="tweet-body">
-                Tweet content
-              </p>
-              <hr class="tweet-rule"/>
-              <footer class="tweet-footer group">
-                <p class="footer-text float-left">x days ago</p>
-                <span class="footer-imgs float-right">
-                  <img src="/images/flag-tweet.png">
-                  <img src="/images/retweet.png">
-                  <img src="/images/heart-tweet.js.png">
-                </span>
-              </footer>
-            </article>
+      <section id="tweets-container" class="tweets">
+          
       </section>
     </main>
 

@@ -6,19 +6,17 @@ article {
   border-width: 2px;
   box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.5);
 }
+
 article:hover {
   border-color: rgba(88, 88, 88, 0.7);
 }
+
 article:hover .tweet-header{
   opacity: 1;
 }
 
 article:hover .footer-imgs{
   display: inline;
-}
-
-.faded {
-  opacity: 0.6;
 }
 
 .tweet-header {
