@@ -69,6 +69,7 @@ const tweetArr = [
 
 $(function() {
   composerCount();
+  composerToggle();
   getTweets();
   addTweet();
 });
@@ -142,7 +143,11 @@ function createTweetElement(tweetObj) {
   return $article;
 }
 
-
+function composerToggle() {
+  $('.compose-button').click(function() {
+    $('.new-tweet').toggle();
+  });
+}
 
 function renderTweets(tweetContent) {
   for(let tweet of tweetContent) {
@@ -150,8 +155,8 @@ function renderTweets(tweetContent) {
   }
 }
 
-function getTweets(){
-  $.ajax('/tweets', {method: 'GET'}).then(function(tweetContent){
+function getTweets() {
+  $.ajax('/tweets', {method: 'GET'}).then(function(tweetContent) {
     renderTweets(tweetContent);
   });
 }
@@ -160,11 +165,11 @@ function addTweet() {
   $("#compose-tweet").on('submit', function(event) {
     event.preventDefault();
     let composer = $('#composer');
-    if (composer.val().length === 0){
+    if (!composer.val()){
       alert("Please enter a tweet!");
-    }else if(composer.val().length > 140){
+    } else if (composer.val().length > 140) {
       alert("Your post is over 140 characters!")
-    }else{
+    } else {
       let content = composer.serialize();
       $.ajax({ url: '/tweets', method: 'POST', data: content }).then(function() {
         $('#composer').val('');
