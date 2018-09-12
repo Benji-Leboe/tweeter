@@ -69,7 +69,7 @@ const tweetArr = [
 
 $(function() {
   composerCount();
-  renderTweets();
+  getTweets();
   addTweet();
 });
 
@@ -144,22 +144,33 @@ function createTweetElement(tweetObj) {
 
 
 
-function renderTweets() {
-  $.ajax('/tweets', {method: 'GET'}).then(function(tweetContent) {
-    for(let tweet of tweetContent) {
-      $(".tweets").prepend(createTweetElement(tweet));
-    }
+function renderTweets(tweetContent) {
+  for(let tweet of tweetContent) {
+    $(".tweets").prepend(createTweetElement(tweet));
+  }
+}
+
+function getTweets(){
+  $.ajax('/tweets', {method: 'GET'}).then(function(tweetContent){
+    renderTweets(tweetContent);
   });
 }
 
 function addTweet() {
   $("#compose-tweet").on('submit', function(event) {
     event.preventDefault();
-    content = $('#composer').serialize();
-    $.ajax({ url: '/tweets', method: 'POST', data: content }).then(function() {
-      $('#composer').val('');
-    }).done(renderTweets(), function() {
-      console.log('Post request successful')
-    });
+    let composer = $('#composer');
+    if (composer.val().length === 0){
+      alert("Please enter a tweet!");
+    }else if(composer.val().length > 140){
+      alert("Your post is over 140 characters!")
+    }else{
+      let content = composer.serialize();
+      $.ajax({ url: '/tweets', method: 'POST', data: content }).then(function() {
+        $('#composer').val('');
+      }).done(getTweets(), function() {
+        console.log('Post request successful')
+      });
+    }
   });
 }
