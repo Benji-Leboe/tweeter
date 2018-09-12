@@ -1,8 +1,8 @@
 h2 {
-  margin: 0 1em 0 1em;
+  margin: 0.5em 1em 0 1em;
 }
 
-hr {
+.compose-rule {
   margin: 0 0.5em 1em 0.5em;
 }
 
@@ -31,6 +31,6 @@ span.counter {
   margin: 1em;
 }
 
-.text-red {
+.text-error {
   color: red;
 }

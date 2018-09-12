@@ -1,0 +1,79 @@
+article {
+  margin: 2em 2em;
+  border-color: rgba(88, 88, 88, 0.3);
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 2px;
+  box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.5);
+}
+article:hover {
+  border-color: rgba(88, 88, 88, 0.7);
+}
+article:hover .tweet-header{
+  opacity: 1;
+}
+
+article:hover .footer-imgs{
+  display: inline;
+}
+
+.faded {
+  opacity: 0.6;
+}
+
+.tweet-header {
+  opacity: 0.6;
+  border-radius: 7px;
+  background-color: #f2f2f2;
+  padding: 0.25em 0.5em 0.5em 0.5em;
+}
+
+.tweet-body {
+  margin-top: 1em;
+  padding: 1em;
+  font-size: 1.15em;
+  color: rgb(6, 75, 88);
+}
+
+.tweet-footer {
+  padding: 0.15em 0.75em 1em 0.75em;
+  color: rgba(6, 75, 88, 0.8);
+  height: 40px;
+}
+
+.footer-imgs {
+  display: none;
+  padding: 0em;
+  margin: 0em;
+}
+
+.footer-text {
+  padding-top: 0.1em;
+  margin: 0em;
+}
+
+
+.tweet-rule {
+  border-color: rgba(240, 240, 240, 0.3);
+  width: 100%;
+}
+
+.tweet-img {
+  border-style: solid;
+  border-color: rgba(240, 240, 240, 0.3);
+  border-width: 0.5px;
+  border-radius: 5px;
+  margin: 0.25em;
+}
+
+.tweet-name {
+  font-size: 1.5em;
+  padding-left: 0.25em;
+  margin-top: 0.25em;
+}
+
+.tweet-username {
+  color: rgba(175, 175, 175, 0.7);
+  margin-top: 0.75em;
+}
+
