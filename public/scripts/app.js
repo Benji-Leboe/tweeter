@@ -72,6 +72,8 @@ $(function() {
   composerToggle();
   getTweets();
   addTweet();
+  showErrors();
+  hideErrors();
 });
 
 function composerCount() {
@@ -80,9 +82,9 @@ function composerCount() {
     let counter = 140;
     counter -= value.length;
     $(this).siblings('.counter').text(counter);
-    if(counter < 0){
+    if(counter < 0) {
       $(this).siblings('.counter').addClass('text-error');
-    }else{
+    } else {
       $(this).siblings('.counter').removeClass('text-error');
     }
   });
@@ -145,7 +147,13 @@ function createTweetElement(tweetObj) {
 
 function composerToggle() {
   $('.compose-button').click(function() {
-    $('.new-tweet').toggle();
+    $('#compose-tweet').slideToggle(500, function() {
+      let styleCheck = $('#compose-tweet').css("display");
+      console.log(styleCheck);
+      if(styleCheck === "block") {
+        $('#composer').focus();
+      }
+    });
   });
 }
 
@@ -156,7 +164,7 @@ function renderTweets(tweetContent) {
 }
 
 function getTweets() {
-  $.ajax('/tweets', {method: 'GET'}).then(function(tweetContent) {
+  $.ajax('/tweets', { method: 'GET' }).then(function(tweetContent) {
     renderTweets(tweetContent);
   });
 }
@@ -165,17 +173,28 @@ function addTweet() {
   $("#compose-tweet").on('submit', function(event) {
     event.preventDefault();
     let composer = $('#composer');
-    if (!composer.val()){
-      alert("Please enter a tweet!");
+    if (!composer.val()) {
+      showErrors("Please enter a tweet!");
     } else if (composer.val().length > 140) {
-      alert("Your post is over 140 characters!")
+      showErrors("Your post is over 140 characters!");
     } else {
+      hideErrors();
       let content = composer.serialize();
       $.ajax({ url: '/tweets', method: 'POST', data: content }).then(function() {
         $('#composer').val('');
       }).done(getTweets(), function() {
+        composer.siblings('.counter').val('').text(140);
         console.log('Post request successful')
       });
     }
   });
+}
+
+function showErrors (message) {
+  $('.errors').text(message).slideDown(600);
+}
+
+function hideErrors() {
+  console.log('Errors hidden');
+  $('.errors').val('').slideUp(600);
 }

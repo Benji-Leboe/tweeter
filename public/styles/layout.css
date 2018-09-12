@@ -41,6 +41,15 @@ main {
   text-align: center;
 }
 
+/* clearfloat */
+.group::before,
+.group::after{
+  content: "";
+  display: table;
+  clear: both;
+  overflow: hidden;
+}
+
 .float-left {
   float: left;
 }
@@ -49,10 +58,6 @@ main {
   float: right;
 }
 
-.group::before,
-.group::after{
-  content: "";
-  display: table;
-  clear: both;
-  overflow: hidden;
-}
+
+
+

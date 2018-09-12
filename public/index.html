@@ -41,11 +41,12 @@
         <form id="compose-tweet" class="center-inline group" method="POST" action="/tweets/" >
           <h2>Compose a Tweet</h2>
           <hr class="compose-rule"/>
+          <span class="errors center-inline"></span>
           <textarea id="composer" name="text" placeholder="Whatcha thinkin, twit?"></textarea>
-          <input class="float-left" type="submit" value="Tweet">
+          <input class="submit-button float-left" type="submit" value="Tweet">
           <span class="counter float-right">140</span>
         </form>
-        
+
       </section>
       <section id="tweets-container" class="tweets">
           
