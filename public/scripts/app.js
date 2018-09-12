@@ -18,7 +18,6 @@ let tweetObj = {
   },
   "created_at": 1461116232227
 }
-const newArr = [1,2,3,4,5];
 
 const tweetArr = [
   {
@@ -94,27 +93,27 @@ function createTweetElement(tweetObj) {
   const {user, content, created_at} = tweetObj;
   const {name, avatars, handle} = user;
 
-  let timeAgo = convertMS((Date.now() - created_at));
+  let timeAgo = convertMilliseconds((Date.now() - created_at));
 
-  function convertMS(ms) {
-    var d, h, m, s;
-    s = Math.floor(ms / 1000);
-    m = Math.floor(s / 60);
-    s = s % 60;
-    h = Math.floor(m / 60);
-    m = m % 60;
-    d = Math.floor(h / 24);
-    h = h % 24;
-    return { d: d, h: h, m: m, s: s };
+  function convertMilliseconds(ms) {
+    let day, hour, min, sec;
+    sec = Math.floor(ms / 1000);
+    min = Math.floor(sec / 60);
+    sec = sec % 60;
+    hour = Math.floor(min / 60);
+    min = min % 60;
+    day = Math.floor(hour / 24);
+    hour = hour % 24;
+    return { day, hour, min, sec };
   };
 
-  let DHM = (function() {
-    if(timeAgo.d) {
-      return `${timeAgo.d} days ago`;
-    } else if (timeAgo.h) {
-      return `${timeAgo.h} hours ago`;      
-    } else if (timeAgo.m) {
-      return `${timeAgo.m} minutes ago`;
+  let dayMinHr = (function() {
+    if(timeAgo.day) {
+      return `${timeAgo.day} days ago`;
+    } else if (timeAgo.hour) {
+      return `${timeAgo.hour} hours ago`;      
+    } else if (timeAgo.min) {
+      return `${timeAgo.min} minutes ago`;
     } else {
       return 'Just now';
     }
@@ -128,7 +127,7 @@ function createTweetElement(tweetObj) {
   let $body = $("<p>").addClass('tweet-body').text(content.text);
   let $hr = $("<hr/>").addClass('tweet-rule');
   let $footer = $("<footer>").addClass('tweet-footer group');
-  let $time = $("<p>").addClass('footer-text float-left').text(DHM);
+  let $time = $("<p>").addClass('footer-text float-left').text(dayMinHr);
   let $footImgs = $("<span>").addClass('footer-imgs float-right').html('<img src="/images/flag-tweet.png"></img><img src="/images/retweet.png"><img src="/images/heart-tweet.js.png">');
 
   $($article).append($header, $body, $hr, $footer);
