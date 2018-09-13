@@ -13,17 +13,12 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
 
   //insert database code here
   function getTweets(cb) {
-    db.collection('tweets').find().toArray((err, tweets) => {
-      if (err) {
-        return cb(err);
-      }
-      cb(null, tweets);
-    });
+    db.collection('tweets').find().toArray(cb);
   }
 
   getTweets((err, tweets) => {
     if (err) throw err;
-    
+
     console.log("Logging each tweet:");
     for (let tweet of tweets) {
       console.log(tweet);
