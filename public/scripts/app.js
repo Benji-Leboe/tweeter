@@ -160,16 +160,21 @@ function composerToggle() {
 }
 
 function renderTweets(tweetContent) {
-  for(let tweet of tweetContent) {
-    $(".tweets").prepend(createTweetElement(tweet));
-  }
   $('#tweets-container').ready(function() {
+    for(let tweet of tweetContent) {
+      $(".tweets").prepend(createTweetElement(tweet));
+    }
+  }).queue(function(){
     $('article.tweet-article').first().slideDown(500);
-  })
+    $(this).dequeue();
+  });
 }
 
 function getTweets() {
-  $.ajax('/tweets', { method: 'GET' }).then(function(tweetContent) {
+  let tweetContent;
+  $.ajax('/tweets', { method: 'GET' }).then(function(data) {
+    tweetContent = data;
+  }).done(function() {
     renderTweets(tweetContent);
   });
 }

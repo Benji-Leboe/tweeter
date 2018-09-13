@@ -12,20 +12,24 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
   console.log(`Connected to mongodb: ${MONGODB_URI}`);
 
   //insert database code here
-  db.collection('tweets').find({}, (err, result) => {
-
-    if (err) throw err;
-
-    result.toArray((err, resultArray) => {
-      if (err) throw err;
-
-      console.log('results.toArray:', resultArray);
-      
-      db.close();
-      
+  function getTweets(cb) {
+    db.collection('tweets').find().toArray((err, tweets) => {
+      if (err) {
+        return cb(err);
+      }
+      cb(null, tweets);
     });
-  });
-  
+  }
 
-  
+  getTweets((err, tweets) => {
+    if (err) throw err;
+    
+    console.log("Logging each tweet:");
+    for (let tweet of tweets) {
+      console.log(tweet);
+    }
+
+    db.close();
+  });
+
 });
