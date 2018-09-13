@@ -100,31 +100,34 @@ function createTweetElement(tweetObj) {
   let timeAgo = convertMilliseconds((Date.now() - created_at));
 
   function convertMilliseconds(ms) {
-    let day, hour, min, sec;
-    sec = Math.floor(ms / 1000);
-    min = Math.floor(sec / 60);
-    sec = sec % 60;
-    hour = Math.floor(min / 60);
-    min = min % 60;
-    day = Math.floor(hour / 24);
-    hour = hour % 24;
-    return { day, hour, min, sec };
-  };
+    let sec = Math.floor(ms / 1000);
+    let min = Math.floor(sec / 60);
+    let hour = Math.floor(min / 60);
+    let day = Math.floor(hour / 24);
+    let month = Math.floor(day / 30);
+    let year = Math.floor(day / 365);
+
+    return { year, month, day, hour, min, sec};
+  }
+
 
   let dayMinHr = (function() {
+    let output = "Just now";
     if(timeAgo.day > 365) {
-      return `${Math.floor(timeAgo.day / 365)} years ago`;
+      output = `${timeAgo.year} year`;
     } else if (timeAgo.day > 30){
-      return `${Math.floor(timeAgo.day / 30)} months ago`;
-    } else if(timeAgo.day) {
-      return `${timeAgo.day} days ago`;
-    } else if (timeAgo.hour) {
-      return `${timeAgo.hour} hours ago`;      
-    } else if (timeAgo.min) {
-      return `${timeAgo.min} minutes ago`;
-    } else {
-      return 'Just now';
+      output = `${timeAgo.month} month`;
+    } else if(timeAgo.day > 0) {
+      output = `${timeAgo.day} day`;
+    } else if (timeAgo.hour > 0) {
+      output = `${timeAgo.hour > 0} hour`;      
+    } else if (timeAgo.min > 0) {
+      output = `${timeAgo.min} minute`;
+    } 
+    if(output.slice(0,2) !== '1 ' && output !== "Just now"){
+      output += 's';
     }
+    return (output == "Just now" ? output : output += " ago");
   })();
 
   let $article = $("<article>").addClass('tweet-article');
@@ -149,7 +152,6 @@ function composerToggle() {
   $('.compose-button').click(function() {
     $('#compose-tweet').slideToggle(500, function() {
       let styleCheck = $('#compose-tweet').css("display");
-      console.log(styleCheck);
       if(styleCheck === "block") {
         $('#composer').focus();
       }
@@ -184,17 +186,17 @@ function addTweet() {
         $('#composer').val('');
       }).done(getTweets(), function() {
         composer.siblings('.counter').val('').text(140);
-        console.log('Post request successful')
+        console.log('Post request successful');
       });
     }
   });
 }
 
 function showErrors (message) {
-  $('.errors').text(message).slideDown(600);
+  $('.errors').text(message).slideDown(300);
 }
 
 function hideErrors() {
-  console.log('Errors hidden');
-  $('.errors').val('').slideUp(600);
+
+  $('.errors').val('').slideUp(300);
 }
