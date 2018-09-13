@@ -11,6 +11,7 @@
 }
 
 #nav-bar .logo {
+  margin-left: 1em;
   height: 80px;
   width: 80px;
 }
@@ -22,12 +23,33 @@
 }
 
 .compose-button {
-  margin: 0.75em;
-  padding: 1em;
+  margin: 1em;
+  padding: 0.5em;
   border-style: solid;
   border-width: 2px;
   border-color: #000;
   border-radius: 10px;
   color: #00a087;
   background-color: rgba(255, 255, 255, 0.7);
+}
+
+.compose-button:hover {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.compose-button:active {
+  background-color: rgba(180, 215, 205, 1);
+}
+
+.compose-btn-img {
+  margin-right: 0.15em;
+  padding: 0.1em;
+  max-height: 25px;
+  max-width: 25px;
+}
+
+.compose-btn-text {
+  max-height: 25px;
+  margin: 0.15em;
+  padding: 0.1em;
 }

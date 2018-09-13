@@ -58,6 +58,8 @@ main {
   float: right;
 }
 
-
+button:focus {
+  outline: none;
+}
 
 
