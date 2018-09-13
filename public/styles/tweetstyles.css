@@ -76,3 +76,6 @@ article:hover .footer-imgs{
   margin-top: 0.75em;
 }
 
+article:first-child {
+  display: none;
+}

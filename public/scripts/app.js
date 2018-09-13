@@ -163,6 +163,9 @@ function renderTweets(tweetContent) {
   for(let tweet of tweetContent) {
     $(".tweets").prepend(createTweetElement(tweet));
   }
+  $('#tweets-container').ready(function() {
+    $('article.tweet-article').first().slideDown(500);
+  })
 }
 
 function getTweets() {
