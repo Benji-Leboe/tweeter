@@ -192,7 +192,7 @@ function addTweet() {
       let content = composer.serialize();
       $.ajax({ url: '/tweets', method: 'POST', data: content }).then(function() {
         $('#composer').val('');
-      }).done(getTweets(), function() {
+      }).done(getTweets, function() {
         composer.siblings('.counter').val('').text(140);
         console.log('Post request successful');
       });
