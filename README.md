@@ -2,7 +2,7 @@
 
 Tweeter is a simple, single-page Twitter clone.
 
-This repository is the starter code for the project: Students will fork and clone this repository, then build upon it to practice their HTML, CSS, JS, jQuery and AJAX front-end skills, and their Node, Express and MongoDB back-end skills.
+This version of Tweeter was created by Benji Leboe for week 3 at Lighthouse Labs. 
 
 ## Getting Started
 
@@ -15,3 +15,21 @@ This repository is the starter code for the project: Students will fork and clon
 
 - Express
 - Node 5.10.x or above
+- body-parser
+- chance
+- md5
+- mongodb
+
+## Overview
+
+Tweeter allows users to submit posts of up to 140 characters and display them on the main page. The post gets saved in an external Mongo database for data persistence.
+
+![tweeter-main](./public/images/tweeter-main.png)
+
+## Features
+
+- 140 character limit with responsive character counter
+- Show/hide tweet composer; autofocus on show
+- Submit tweets with enter key
+- Real-time tweet age display
+- Highlight posts on mouseover
