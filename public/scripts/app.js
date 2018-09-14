@@ -70,7 +70,7 @@ const tweetArr = [
 $(function() {
   composerCount();
   composerToggle();
-  getTweets(renderAllTweets);
+  getTweets();
   addTweet();
   showErrors();
   hideErrors();
@@ -95,7 +95,7 @@ function composerCount() {
 function createTweetElement(tweetObj) {
   
   const {user, content, created_at} = tweetObj;
-  console.log(tweetObj);
+  // console.log(tweetObj);
   const {name, avatars, handle} = user;
 
   let timeAgo = convertMilliseconds((Date.now() - created_at));
@@ -160,29 +160,33 @@ function composerToggle() {
   });
 }
 
-function renderAllTweets(tweetContent) {
-  console.log("Tweet array:", tweetContent);
+function renderTweets(tweetContent) {
+  // console.log("Tweet array:", tweetContent);
   $('#tweets-container').ready(function() {
     for(let tweet of tweetContent) {
       $(".tweets").prepend(createTweetElement(tweet));
     }
-  })
+  }).queue(function(){
+    $('article.tweet-article').first().css("display", "block");
+    $(this).dequeue();
+  });
 }
 
-function prependTweet(tweets) {
+function prependTweet(tweet) {
+  console.log(tweet);
   $('#tweets-container').ready(function() {
-    $(".tweets").prepend(createTweetElement(tweets[tweets.length - 1]));
+    $(".tweets").prepend(createTweetElement(tweet));
   }).queue(function(){
     $('article.tweet-article').first().slideDown(500);
     $(this).dequeue();
   });
 }
 
-function getTweets(cb) {
+function getTweets() {
   $.ajax('/tweets', { method: 'GET' })
   .done(function(data) {
-    console.log("Data:", data)
-    cb(data);
+    // console.log("Data:", data)
+    renderTweets(data);
   });
 }
 
@@ -205,10 +209,12 @@ function addTweet() {
     } else {
       hideErrors();
       let content = composer.serialize();
-      $.ajax({ url: '/tweets', method: 'POST', data: content }).then(function() {
+      $.ajax({ url: '/tweets', method: 'POST', data: content, 
+      success: function(tweet) {
+        prependTweet(tweet);
+      } }).then(function() {
         $('#composer').val('');
       }).done(function() {
-        getTweets(prependTweet)
         composer.siblings('.counter').val('').text(140);
         console.log('Post request successful');
       });

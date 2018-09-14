@@ -7,8 +7,13 @@ module.exports = function makeDataHelpers(db) {
     // Saves a tweet to `db`
     saveTweet: function(newTweet, cb) {
       db.collection('tweeter').insertOne(newTweet, function(err) {
-        if (err) throw err;
-        cb(null, true);
+        if (err){
+          throw err; 
+        } else {
+          cb(null, true);
+        } 
+        
+
       });
     },
 
