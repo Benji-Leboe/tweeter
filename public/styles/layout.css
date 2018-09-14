@@ -1,7 +1,6 @@
 /*
  * http://www.paulirish.com/2012/box-sizing-border-box-ftw/
  * https://css-tricks.com/international-box-sizing-awareness-day/
- * Do not modify these two selectors, please
  */
 html {
   box-sizing: border-box;
@@ -11,7 +10,7 @@ html {
 }
 
 /*
- * Global layout stuff
+ * Global layout 
  */
 
 body {
@@ -32,10 +31,6 @@ main {
   background-color: #FFFFFF;
   box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.3);
 }
-
-/*
- * Additional CSS can be defined below or in other CSS files, as per instructions
- */
 
 .center-inline {
   text-align: center;
@@ -58,6 +53,7 @@ main {
   float: right;
 }
 
+/* clear focus ring on clicked buttons */
 button:focus {
   outline: none;
 }

@@ -1,13 +1,16 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
   <head>
     <!-- Meta Information -->
     <title>Tweeter - Home Page</title>
-
-    <!-- External CSS -->
-    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
     <meta charset="utf-8" />
+
+    <!-- External CSS / normalize and font styles -->
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Condensed" />
+    
     <!-- App CSS -->
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
     <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
@@ -28,30 +31,45 @@
     <nav id="nav-bar" class="group">
       <img class="logo float-left" src="/images/bird.png">
       <span class="header float-left">Tweeter</span>
-      <button type="button" class="compose-button float-right"><img class="float-left compose-btn-img" src="images/compose-pen.png"><p class="float-right compose-btn-text">Compose</p></button>
+      <button type="button" class="compose-button float-right">
+        <img class="float-left compose-btn-img" src="images/compose-pen.png">
+        <p class="float-right compose-btn-text">Compose</p>
+      </button>
     </nav>
 
     <!-- Page-specific (main) content here -->
     <main class="container">
+
       <div>
         <h1 class="center-inline">Welcome to Tweeter!</h1>
       </div>
+
       <section class="new-tweet">
 
-        <form id="compose-tweet" class="center-inline group" method="POST" action="/tweets/" >
+        <!-- new tweet composer-->
+        <form id="compose-tweet" class="center-inline group" method="POST" action="/tweets/">
           <h2>Compose a Tweet</h2>
-          <hr class="compose-rule"/>
+          <hr class="compose-rule" />
+
+          <!-- absolute positioned error display -->
           <span class="errors center-inline"></span>
-          <textarea id="composer" name="text" placeholder="Whatcha thinkin, twit?"></textarea>
-          <input class="submit-button float-left" type="submit" value="Tweet">
+
+          <textarea id="composer" name="text" placeholder="What's the word, bird?"></textarea>
+          <input class="submit-button float-left" type="submit" value="Tweet" />
+          <!-- character counter -->
           <span class="counter float-right">140</span>
+
         </form>
 
       </section>
+
+      <!-- new tweet article container -->
       <section id="tweets-container" class="tweets">
           
       </section>
+
     </main>
 
   </body>
+
 </html>

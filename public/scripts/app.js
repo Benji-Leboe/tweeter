@@ -10,6 +10,15 @@ $(function() {
   hideErrors();
 });
 
+//show/hide errors for addTweet conditionals
+function showErrors(message) {
+  $('.errors').text(message).slideDown(300);
+}
+
+function hideErrors() {
+  $('.errors').val('').slideUp(200);
+}
+
 function composerCount() {
   $("#composer").on('input', function() {
 
@@ -28,6 +37,9 @@ function composerCount() {
 
 function composerToggleBtn() {
   $('.compose-button').click(function() {
+    //hide error message on toggle;
+    hideErrors();
+
     $('#compose-tweet').slideToggle(500, function() {
       let styleCheck = $('#compose-tweet').css("display");
       if (styleCheck === "block") {
@@ -142,14 +154,6 @@ function getTweets() {
   });
 }
 
-//show/hide errors for addTweet conditionals
-function showErrors(message) {
-  $('.errors').text(message).slideDown(300);
-}
-
-function hideErrors() {
-  $('.errors').val('').slideUp(300);
-}
 
 //add tweet to database and call prepend tweet function
 function addTweet() {

@@ -19,6 +19,11 @@ article:hover .footer-imgs{
   display: inline;
 }
 
+/* for animating new tweet */
+article:first-child {
+  display: none;
+}
+
 .tweet-header {
   opacity: 0.6;
   border-radius: 7px;
@@ -51,7 +56,6 @@ article:hover .footer-imgs{
   margin: 0em;
 }
 
-
 .tweet-rule {
   border-color: rgba(240, 240, 240, 0.3);
   width: 100%;
@@ -76,6 +80,3 @@ article:hover .footer-imgs{
   margin-top: 0.75em;
 }
 
-article:first-child {
-  display: none;
-}

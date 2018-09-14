@@ -2,10 +2,6 @@ h2 {
   margin: 0.5em 1em 0 1em;
 }
 
-.compose-rule {
-  margin: 0 0.5em 1em 0.5em;
-}
-
 form {
   position: relative;
   background-color: #eee;
@@ -32,12 +28,16 @@ span.counter {
   margin: 1em;
 }
 
-.text-error {
-  color: red;
+.compose-rule {
+  margin: 0 0.5em 1em 0.5em;
 }
 
 .submit-button {
   z-index: 999;
+}
+
+.text-error {
+  color: red;
 }
 
 .errors {
