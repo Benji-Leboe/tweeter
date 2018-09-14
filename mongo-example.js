@@ -1,30 +1,30 @@
-"use strict";
+// "use strict";
 
-const {MongoClient} = require('mongodb');
-const MONGODB_URI = "mongodb://localhost:27017/tweeter";
+// const {MongoClient} = require('mongodb');
+// const MONGODB_URI = "mongodb://localhost:27017/tweeter";
 
-MongoClient.connect(MONGODB_URI, (err, db) => {
-  if (err) {
-    console.error(`Failed to connect: ${MONGODB_URI}`);
-    throw err;
-  }
+// MongoClient.connect(MONGODB_URI, (err, db) => {
+//   if (err) {
+//     console.error(`Failed to connect: ${MONGODB_URI}`);
+//     throw err;
+//   }
 
-  console.log(`Connected to mongodb: ${MONGODB_URI}`);
+//   console.log(`Connected to mongodb: ${MONGODB_URI}`);
 
-  //insert database code here
-  function getTweets(cb) {
-    db.collection('tweets').find().toArray(cb);
-  }
+//   //insert database code here
+//   function getTweets(cb) {
+//     db.collection('tweets').find().toArray(cb);
+//   }
 
-  getTweets((err, tweets) => {
-    if (err) throw err;
+//   getTweets((err, tweets) => {
+//     if (err) throw err;
 
-    console.log("Logging each tweet:");
-    for (let tweet of tweets) {
-      console.log(tweet);
-    }
+//     console.log("Logging each tweet:");
+//     for (let tweet of tweets) {
+//       console.log(tweet);
+//     }
 
-    db.close();
-  });
+//     db.close();
+//   });
 
-});
+// });

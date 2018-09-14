@@ -5,25 +5,36 @@ const userHelper    = require("../lib/util/user-helper")
 const express       = require('express');
 const tweetsRoutes  = express.Router();
 
-module.exports = function(DataHelpers) {
+//callbacks for database functions
+module.exports = (DataHelpers) => {
 
-  tweetsRoutes.get("/", function(req, res) {
+  //call getTweets with callback
+  tweetsRoutes.get("/", (req, res) => {
+
     DataHelpers.getTweets((err, tweets) => {
+
       if (err) {
         res.status(500).json({ error: err.message });
+
       } else {
+        //sort function for tweets in db
         const sortNewestFirst = (a, b) => a.created_at - b.created_at;
         res.json(tweets.sort(sortNewestFirst));
       }
+
     });
+
   });
 
-  tweetsRoutes.post("/", function(req, res) {
+  //call saveTweet with callback
+  tweetsRoutes.post("/", (req, res) => {
+
     if (!req.body.text) {
-      res.status(400).json({ error: 'invalid request: no data in POST body'});
+      res.status(400).json({ error: 'invalid request: no data in POST body' });
       return;
     }
 
+    //create random user JSON template
     const user = req.body.user ? req.body.user : userHelper.generateRandomUser();
     const tweet = {
       user: user,
@@ -34,14 +45,19 @@ module.exports = function(DataHelpers) {
     };
 
     DataHelpers.saveTweet(tweet, (err) => {
+
       if (err) {
         res.status(500).json({ error: err.message });
+
       } else {
+        //pass tweet to app.js to prepend
         res.status(201).json(tweet);
       }
+
     });
+
   });
 
+  //pass values to index.js
   return tweetsRoutes;
-
 }
