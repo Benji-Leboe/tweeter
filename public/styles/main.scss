@@ -1,0 +1,63 @@
+@import 'sass_partials/mixins';
+@import 'sass_partials/variables';
+@import 'sass_partials/nav';
+@import 'sass_partials/new-tweets';
+
+
+/* box siszing inheritance */
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+/*
+ * Global layout 
+ */
+
+body {
+  margin: $none;
+  color: #244751;
+  background-color: #eee;
+  font-family: 'Roboto Condensed', sans-serif;
+
+  main {
+    width: 450px;
+    min-height: 100vh;
+    position: relative;
+    padding-top: 120px;
+    padding-bottom: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #FFFFFF;
+    box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.3);
+  }
+
+
+  .center-inline {
+    text-align: center;
+  }
+}
+
+/* clearfloat */
+.group::before,
+.group::after{
+  content: "";
+  display: table;
+  clear: both;
+  overflow: hidden;
+}
+
+.float-left {
+  float: left;
+}
+
+.float-right {
+  float: right;
+}
+
+/* clear focus ring on clicked buttons */
+
+
+

@@ -1,0 +1,232 @@
+#nav-bar {
+  position: fixed;
+  top: 0em;
+  min-width: 100%;
+  height: 80px;
+  padding-left: 2em;
+  padding-right: 2em;
+  background-color: #00a087;
+  color: #e8fdff;
+  z-index: 999;
+}
+#nav-bar .logo {
+  margin-left: 1em;
+  height: 80px;
+  width: 80px;
+}
+#nav-bar .header {
+  font-size: 2em;
+  line-height: 250%;
+  margin-left: 10px;
+}
+#nav-bar .compose-toggle {
+  margin: 1em;
+  padding: 0.5em;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #000;
+  border-radius: 10px;
+  color: #00a087;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+#nav-bar .compose-toggle:focus {
+  outline: none;
+}
+#nav-bar .compose-toggle:hover {
+  background-color: white;
+}
+#nav-bar .compose-toggle:active {
+  background-color: #b4d7cd;
+}
+#nav-bar .compose-toggle .compose-btn-img {
+  margin-right: 0.15em;
+  padding: 0.1em;
+  max-height: 25px;
+  max-width: 25px;
+}
+#nav-bar .compose-toggle .compose-btn-text {
+  max-height: 25px;
+  margin: 0.15em;
+  padding: 0.1em;
+}
+
+form {
+  position: relative;
+  background-color: #eee;
+  margin: 0em 2em;
+  border-color: #a0a0a0;
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 2px;
+  box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.5);
+}
+form h2 {
+  margin: 0.5em 1em 0em 1em;
+}
+form textarea {
+  width: 90%;
+  padding: 0.5em;
+  margin: 1em auto 1em auto;
+}
+form input, form span.counter {
+  margin: 1em;
+}
+form .compose-rule {
+  margin: 0em 0.5em 1em 0.5em;
+}
+form .submit-button {
+  margin: 1em;
+  padding: 0.5em;
+  border-style: solid;
+  border-width: 0.5px;
+  border-color: #000;
+  border-radius: 5px;
+  padding: 0.5em;
+  z-index: 999;
+}
+form .submit-button:focus {
+  outline: none;
+}
+form .submit-button:hover {
+  background-color: #f0f0f0;
+}
+form .submit-button:active {
+  background-color: #888888;
+}
+form .text-error {
+  color: #ff0000;
+}
+form .errors {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  position: absolute;
+  bottom: 50px;
+  display: none;
+  width: 100%;
+  color: #ff0000;
+  padding: 0em;
+}
+
+article {
+  margin: 2em;
+  border-color: rgba(88, 88, 88, 0.3);
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 2px;
+  box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.5);
+}
+article:hover {
+  border-color: rgba(88, 88, 88, 0.7);
+}
+article:hover .tweet-header {
+  opacity: 1;
+}
+article:hover .footer-imgs {
+  display: inline;
+}
+article:first-child {
+  display: none;
+}
+article .tweet-header {
+  opacity: 0.6;
+  border-radius: 7px;
+  background-color: #f2f2f2;
+  padding: 0.25em 0.5em 0.5em 0.5em;
+}
+article .tweet-body {
+  margin-top: 1em;
+  padding: 1em;
+  font-size: 1.15em;
+  color: #064b58;
+  overflow-wrap: break-word;
+}
+article .tweet-footer {
+  padding: 0.15em 0.75em 1em 0.75em;
+  color: rgba(6, 75, 88, 0.8);
+  height: 40px;
+}
+article .footer-imgs {
+  display: none;
+  padding: 0em;
+  margin: 0em;
+}
+article .footer-text {
+  padding-top: 0.1em;
+  margin: 0em;
+}
+article .tweet-rule {
+  border-color: rgba(240, 240, 240, 0.3);
+  width: 100%;
+}
+article .tweet-img {
+  border-style: solid;
+  border-color: rgba(240, 240, 240, 0.3);
+  border-width: 0.5px;
+  border-radius: 5px;
+  margin: 0.25em;
+}
+article .tweet-name {
+  font-size: 1.5em;
+  padding-left: 0.25em;
+  margin-top: 0.25em;
+}
+article .tweet-username {
+  color: rgba(175, 175, 175, 0.7);
+  margin-top: 0.75em;
+}
+
+/* for animating new tweet */
+/* box siszing inheritance */
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+/*
+ * Global layout 
+ */
+body {
+  margin: 0em;
+  color: #244751;
+  background-color: #eee;
+  font-family: "Roboto Condensed", sans-serif;
+}
+body main {
+  width: 450px;
+  min-height: 100vh;
+  position: relative;
+  padding-top: 120px;
+  padding-bottom: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #FFFFFF;
+  box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.3);
+}
+body .center-inline {
+  text-align: center;
+}
+
+/* clearfloat */
+.group::before,
+.group::after {
+  content: "";
+  display: table;
+  clear: both;
+  overflow: hidden;
+}
+
+.float-left {
+  float: left;
+}
+
+.float-right {
+  float: right;
+}
+
+/* clear focus ring on clicked buttons */
+
+/*# sourceMappingURL=main.css.map */

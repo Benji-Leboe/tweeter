@@ -1,0 +1,17 @@
+@mixin button($width, $radius) {
+  margin: 1em;
+  padding: 0.5em;
+  border-style: solid;
+  border-width: $width;
+  border-color: #000;
+  border-radius: $radius;
+  &:focus {
+    outline: none;
+  }
+}
+
+@mixin select($property) {
+  -webkit-user-select: $property;
+    -moz-user-select: $property;
+    -ms-user-select: $property;
+}

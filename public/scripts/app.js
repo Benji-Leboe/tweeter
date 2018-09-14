@@ -36,7 +36,7 @@ function composerCount() {
 }
 
 function composerToggleBtn() {
-  $('.compose-button').click(function() {
+  $('.compose-toggle').click(function() {
     //hide error message on toggle;
     hideErrors();
 

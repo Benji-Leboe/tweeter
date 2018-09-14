@@ -1,0 +1,156 @@
+@import 'mixins';
+@import 'variables';
+
+form {
+  position: relative;
+  background-color: #eee;
+  margin: $none 2em;
+  border-color: #a0a0a0;
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 2px;
+  box-shadow: $dropshadow;
+
+  h2 {
+    margin: 0.5em 1em $none 1em;
+  }
+
+  textarea {
+    width: 90%;
+    padding: 0.5em;
+    margin: 1em auto 1em auto;
+  }
+
+  input, span.counter {
+    margin: 1em;
+  }
+
+  .compose-rule {
+    margin: $none 0.5em 1em 0.5em;
+  }
+
+  .submit-button {
+    @include button(0.5px, 5px);
+    padding: 0.5em;
+    z-index: 999;
+    &:hover {
+      background-color: rgb(240, 240, 240);
+    }
+  
+    &:active {
+      background-color: rgb(136, 136, 136);
+    }
+
+  }
+
+  .text-error {
+    color: $error-color;
+  }
+
+  .errors {
+    @include select(none);
+    position: absolute;
+    bottom: 50px;
+    display: none;
+    width: 100%;
+    color: $error-color;
+    padding: $none;
+  }
+}
+
+article {
+  margin: 2em;
+  border-color: rgba(88, 88, 88, 0.3);
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 2px;
+  box-shadow: $dropshadow;
+
+  &:hover {
+    border-color: rgba(88, 88, 88, 0.7);
+
+    .tweet-header {
+      opacity: 1;
+    }
+
+    .footer-imgs{
+      display: inline;
+    }
+  }
+
+  &:first-child {
+    display: none;
+  }
+
+  .tweet-header {
+    opacity: 0.6;
+    border-radius: 7px;
+    background-color: #f2f2f2;
+    padding: 0.25em 0.5em 0.5em 0.5em;
+  }
+  
+  .tweet-body {
+    margin-top: 1em;
+    padding: 1em;
+    font-size: 1.15em;
+    color: rgb(6, 75, 88);
+    overflow-wrap: break-word;
+  }
+  
+  .tweet-footer {
+    padding: 0.15em 0.75em 1em 0.75em;
+    color: rgba(6, 75, 88, 0.8);
+    height: 40px;
+  }
+  
+  .footer-imgs {
+    display: none;
+    padding: $none;
+    margin: $none;
+  }
+  
+  .footer-text {
+    padding-top: 0.1em;
+    margin: $none;
+  }
+  
+  .tweet-rule {
+    border-color: $borderfaded;
+    width: 100%;
+  }
+  
+  .tweet-img {
+    border-style: solid;
+    border-color: $borderfaded;
+    border-width: 0.5px;
+    border-radius: 5px;
+    margin: 0.25em;
+  }
+  
+  .tweet-name {
+    font-size: 1.5em;
+    padding-left: 0.25em;
+    margin-top: 0.25em;
+  }
+  
+  .tweet-username {
+    color: rgba(175, 175, 175, 0.7);
+    margin-top: 0.75em;
+  }
+
+}
+
+
+
+
+/* for animating new tweet */
+
+
+
+
+
+
+
+
+
+
