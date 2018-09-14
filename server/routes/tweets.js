@@ -12,7 +12,8 @@ module.exports = function(DataHelpers) {
       if (err) {
         res.status(500).json({ error: err.message });
       } else {
-        res.json(tweets);
+        const sortNewestFirst = (a, b) => a.created_at - b.created_at;
+        res.json(tweets.sort(sortNewestFirst));
       }
     });
   });

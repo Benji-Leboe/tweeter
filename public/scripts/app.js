@@ -70,7 +70,7 @@ const tweetArr = [
 $(function() {
   composerCount();
   composerToggle();
-  getTweets();
+  getTweets(renderAllTweets);
   addTweet();
   showErrors();
   hideErrors();
@@ -95,6 +95,7 @@ function composerCount() {
 function createTweetElement(tweetObj) {
   
   const {user, content, created_at} = tweetObj;
+  console.log(tweetObj);
   const {name, avatars, handle} = user;
 
   let timeAgo = convertMilliseconds((Date.now() - created_at));
@@ -120,14 +121,14 @@ function createTweetElement(tweetObj) {
     } else if(timeAgo.day > 0) {
       output = `${timeAgo.day} day`;
     } else if (timeAgo.hour > 0) {
-      output = `${timeAgo.hour > 0} hour`;      
+      output = `${timeAgo.hour} hour`;      
     } else if (timeAgo.min > 0) {
       output = `${timeAgo.min} minute`;
     } 
     if(output.slice(0,2) !== '1 ' && output !== "Just now"){
       output += 's';
     }
-    return (output == "Just now" ? output : output += " ago");
+    return (output === "Just now" ? output : output += " ago");
   })();
 
   let $article = $("<article>").addClass('tweet-article');
@@ -159,27 +160,41 @@ function composerToggle() {
   });
 }
 
-function renderTweets(tweetContent) {
+function renderAllTweets(tweetContent) {
+  console.log("Tweet array:", tweetContent);
   $('#tweets-container').ready(function() {
     for(let tweet of tweetContent) {
       $(".tweets").prepend(createTweetElement(tweet));
     }
+  })
+}
+
+function prependTweet(tweets) {
+  $('#tweets-container').ready(function() {
+    $(".tweets").prepend(createTweetElement(tweets[tweets.length - 1]));
   }).queue(function(){
     $('article.tweet-article').first().slideDown(500);
     $(this).dequeue();
   });
 }
 
-function getTweets() {
-  let tweetContent;
-  $.ajax('/tweets', { method: 'GET' }).then(function(data) {
-    tweetContent = data;
-  }).done(function() {
-    renderTweets(tweetContent);
+function getTweets(cb) {
+  $.ajax('/tweets', { method: 'GET' })
+  .done(function(data) {
+    console.log("Data:", data)
+    cb(data);
   });
 }
 
 function addTweet() {
+  $('#composer').keydown(function (e) {
+    if (e.which == 13) {
+      e.preventDefault();
+      $('#compose-tweet').submit();
+      return false; 
+    }
+  });
+
   $("#compose-tweet").on('submit', function(event) {
     event.preventDefault();
     let composer = $('#composer');
@@ -192,7 +207,8 @@ function addTweet() {
       let content = composer.serialize();
       $.ajax({ url: '/tweets', method: 'POST', data: content }).then(function() {
         $('#composer').val('');
-      }).done(getTweets, function() {
+      }).done(function() {
+        getTweets(prependTweet)
         composer.siblings('.counter').val('').text(140);
         console.log('Post request successful');
       });
@@ -205,6 +221,5 @@ function showErrors (message) {
 }
 
 function hideErrors() {
-
   $('.errors').val('').slideUp(300);
 }
