@@ -75,7 +75,7 @@ module.exports = (DataHelpers) => {
       return;
     }
 
-    const {postID, likes} = req.body;
+    const { postID, likes } = req.body;
 
     DataHelpers.saveLikes(postID, likes, (err) => {
 

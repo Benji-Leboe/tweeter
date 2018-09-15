@@ -23,7 +23,6 @@ function hideErrors() {
 function composerCount() {
   
   $("#composer").on('input', function() {
-    console.log('input');
     let value = $(this).val();
     let counter = 140;
     counter -= value.length;
@@ -61,6 +60,22 @@ function convertMilliseconds(ms) {
   let year = Math.floor(day / 365);
 
   return { year, month, day, hour, min, sec };
+}
+
+function likeMaker(likes){
+  let liked = Number(likes);
+  console.log (liked, typeof liked);
+  if (liked < 1) {
+    return "Be the first to like this post!";
+  } else if (liked === 1) {
+    return "One person likes this.";
+  } else {
+    return `${liked} people like this.`;
+  }
+}
+
+function updateLikes(){
+
 }
 
 function createTweetElement(tweetObject) {
@@ -109,6 +124,7 @@ function createTweetElement(tweetObject) {
   let $name = $("<h3>").addClass('tweet-name flex-left').text(name);
   let $username = $("<p>").addClass('tweet-username flex-right').text(handle);
   let $body = $("<p>").addClass('tweet-body').text(content.text);
+  let $liked = $('<p>').addClass('like-display flex-right').text("Be the first to like this post!");
   let $hr = $("<hr/>").addClass('tweet-rule');
   let $footer = $("<footer>").addClass('tweet-footer flex-row');
   let $time = $("<p>").addClass('footer-text flex-left').text(dayMinHr);
@@ -119,7 +135,7 @@ function createTweetElement(tweetObject) {
         <input class="img-submit likeBtn" type="image" alt="submit" src="/images/heart-tweet.js.png" />`
       );
 
-  $($article).append($header, $body, $hr, $footer);
+  $($article).append($header, $body, $liked, $hr, $footer);
   $($header).append($avatar, $name, $username);
   $($footer).append($time, $footImgs);
   
@@ -132,8 +148,9 @@ function createTweetElement(tweetObject) {
 
 function likeTweet(){
    
-  //**TODO: CHANGE TO USERID FROM COOKIES
+  //**TODO** CHANGE TO USERID FROM COOKIES
   //object to store individual post boolean
+  //**TODO** FIX PERSISTENCE ISSUES WITH REMEMBERED LIKES
   let liked = {};
 
   $('#tweets-container').on('click', '.likeBtn', function() {
@@ -145,23 +162,24 @@ function likeTweet(){
     if(!liked[targetID]){
       liked[targetID] = false;
     }
-
+    tweetData.likes = Number(tweetData.likes);
 
     liked[targetID] === false ? liked[targetID] = true : liked[targetID] = false;
 
     liked[targetID] === true ? tweetData.likes += 1 : tweetData.likes -= 1;
-
+    
+    let currentLikes = likeMaker(tweetData.likes);
+    console.log(typeof tweetData.likes);
     $.ajax({ 
       method: 'PUT', 
       url: '/tweets/likes',
-      dataType: "json",
       data: tweetData
       
-    }).done(function() {
-      console.log('success');
+    }).done( function() {
+      $(this).parents('.tweet-article').find('.like-display').text(currentLikes);
 
-    }).fail( function() {
-      console.log('error');
+    }).fail( function(err) {
+      if (err) throw err;
 
     });
   });
@@ -178,7 +196,7 @@ function renderTweets(tweetContent) {
   }).queue(function() {
     //conditional removing css "display: none" default for first child
     $('article.tweet-article').first()
-    .css("display", "block");
+    .css("display", "flex");
     $(this).dequeue();
   });
 }

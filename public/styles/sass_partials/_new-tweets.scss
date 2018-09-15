@@ -96,14 +96,39 @@ article {
     border-radius: 7px;
     background-color: #f2f2f2;
     padding: 0.25rem 0.5rem 0.5rem 0.5rem;
+
+    .tweet-img {
+      border-style: solid;
+      border-color: $borderfaded;
+      border-width: 0.5px;
+      border-radius: 5px;
+      margin: 0.25rem;
+    }
+    
+    .tweet-name {
+      font-size: 1.25rem;
+      padding-left: 0.25rem;
+      margin-top: 0.5rem;
+    }
+    
+    .tweet-username {
+      color: rgba(175, 175, 175, 0.7);
+      margin-top: 0.75rem;
+    }
   }
   
   .tweet-body {
     margin-top: 1rem;
     padding: 1rem;
-    font-size: 1.15rem;
+    font-size: 1rem;
     color: rgb(6, 75, 88);
     overflow-wrap: break-word;
+  }
+
+  .like-display {
+    padding: 0.5rem;
+    font-size: 0.75rem;
+    color: rgba(175, 175, 175, 0.7);
   }
   
   .tweet-footer {
@@ -128,24 +153,6 @@ article {
     width: 100%;
   }
   
-  .tweet-img {
-    border-style: solid;
-    border-color: $borderfaded;
-    border-width: 0.5px;
-    border-radius: 5px;
-    margin: 0.25rem;
-  }
-  
-  .tweet-name {
-    font-size: 1.25rem;
-    padding-left: 0.25rem;
-    margin-top: 0.5rem;
-  }
-  
-  .tweet-username {
-    color: rgba(175, 175, 175, 0.7);
-    margin-top: 0.75rem;
-  }
 
   .img-submit {
     margin: $none;
