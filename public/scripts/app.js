@@ -156,9 +156,27 @@ function likeTweet(){
 
     let postLikes = tweetData.likes;
 
+    console.log(tweetData);
+
     console.log(`User: ${targetID}; Post ID: ${postID}; Likes: ${postLikes}`);
 
-    // $.ajax({ url: `/tweets?_method=PUT`, method: 'POST', data: {} })
+    $.ajax({ 
+      method: 'PUT', 
+      url: '/tweets/likes',
+      dataType: "json",
+      data: tweetData
+      
+    }).done(function() {
+      console.log('success');
+    }).fail( function() {
+      console.log('error');
+    })
+
+    // $.ajax('/tweets').done(function() {
+    //   console.log('success');
+    // }).fail(function() {
+    //   console.log('error');
+    // })
   })
 }
 

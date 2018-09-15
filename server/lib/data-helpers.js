@@ -3,6 +3,9 @@
 // Defines helper functions for saving and getting tweets, using the database `db`
 module.exports = function makeDataHelpers(db) {
 
+  //require ObjectId function from Mongo
+  let ObjectId = require('mongodb').ObjectID;
+
   //pass functions to index.js to be used by tweetRoutes
   return {
 
@@ -26,13 +29,24 @@ module.exports = function makeDataHelpers(db) {
       });
     },
 
-    saveLikes: function (cb) {
-      db.collection('tweeter').insertOne(likeCount, (err) => {
+    saveLikes: function (post_id, post_likes, cb) {
+      
+
+      db.collection('tweeter').findOneAndUpdate({'_id': ObjectId(post_id)},
+        {$set: {'likes': post_likes}},
+        {
+          projection: {'_id': 1, 'likes': 1},
+          returnOriginal: false
+        },
+        (err, result) => {
 
         if (err) throw err;
 
+        console.log(result);
+
         cb(null, true);
-      })
+      });
+
     }
 
   };
