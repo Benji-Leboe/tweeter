@@ -7,6 +7,11 @@
 /* box siszing inheritance */
 html {
   box-sizing: border-box;
+  font-size: 16px;
+
+  @media (max-width: 1000px) {
+    font-size: calc(12px + .4vw);
+  }
 }
 *, *:before, *:after {
   box-sizing: inherit;
@@ -23,7 +28,7 @@ body {
   font-family: 'Roboto Condensed', sans-serif;
 
   main {
-    width: 450px;
+    max-width: 450px;
     min-height: 100vh;
     position: relative;
     padding-top: 120px;
@@ -32,6 +37,7 @@ body {
     margin-right: auto;
     background-color: #FFFFFF;
     box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.3);
+
   }
 
 
@@ -40,24 +46,31 @@ body {
   }
 }
 
-/* clearfloat */
-.group::before,
-.group::after{
-  content: "";
-  display: table;
-  clear: both;
-  overflow: hidden;
+.flex-box {
+  display: flex;
+  flex-direction: column;
 }
 
-.float-left {
-  float: left;
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
-.float-right {
-  float: right;
+.flex-row {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
-/* clear focus ring on clicked buttons */
+.flex-left {
+  display: flex;
+  margin-right: auto;
+}
 
-
-
+.flex-right {
+  display: flex;
+  margin-left: auto;
+}

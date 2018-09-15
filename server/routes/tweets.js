@@ -2,8 +2,13 @@
 
 const userHelper    = require("../lib/util/user-helper")
 
+const bodyParser    = require("body-parser");
 const express       = require('express');
 const tweetsRoutes  = express.Router();
+const methodOverride = require("method-override");
+
+tweetsRoutes.use(bodyParser.urlencoded({ extended: false }));
+tweetsRoutes.use(methodOverride('_method'));
 
 //callbacks for database functions
 module.exports = (DataHelpers) => {

@@ -8,6 +8,7 @@ $(function() {
   addTweet();
   showErrors();
   hideErrors();
+  likeTweet();
 });
 
 //show/hide errors for addTweet conditionals
@@ -20,17 +21,18 @@ function hideErrors() {
 }
 
 function composerCount() {
+  
   $("#composer").on('input', function() {
-
+    console.log('input');
     let value = $(this).val();
     let counter = 140;
     counter -= value.length;
 
-    $(this).siblings('.counter').text(counter);
+    $(this).siblings('span.flex-row').children('.counter').text(counter);
     if (counter < 0) {
-      $(this).siblings('.counter').addClass('text-error');
+      $(this).siblings('span.flex-row').children('.counter').addClass('text-error');
     } else {
-      $(this).siblings('.counter').removeClass('text-error');
+      $(this).siblings('span.flex-row').children('.counter').removeClass('text-error');
     }
   });
 }
@@ -99,22 +101,60 @@ function createTweetElement(tweetObject) {
   })();
 
   //dynamic HTML constructor
-  let $article = $("<article>").addClass('tweet-article');
-  let $header = $("<header>").addClass('tweet-header group');
-  let $avatar = $("<img>").addClass('tweet-img float-left').attr("src", avatars.small);
-  let $name = $("<h3>").addClass('tweet-name float-left').text(name);
-  let $username = $("<p>").addClass('tweet-username float-right').text(handle);
+  let $article = $("<article>").addClass('tweet-article flex-box');
+  let $header = $("<header>").addClass('tweet-header flex-container');
+  let $avatar = $("<img>").addClass('tweet-img flex-left').attr("src", avatars.small);
+  let $name = $("<h3>").addClass('tweet-name flex-left').text(name);
+  let $username = $("<p>").addClass('tweet-username flex-right').text(handle);
   let $body = $("<p>").addClass('tweet-body').text(content.text);
   let $hr = $("<hr/>").addClass('tweet-rule');
-  let $footer = $("<footer>").addClass('tweet-footer group');
-  let $time = $("<p>").addClass('footer-text float-left').text(dayMinHr);
-  let $footImgs = $("<span>").addClass('footer-imgs float-right').html('<img src="/images/flag-tweet.png"></img><img src="/images/retweet.png"><img src="/images/heart-tweet.js.png">');
+  let $footer = $("<footer>").addClass('tweet-footer flex-row');
+  let $time = $("<p>").addClass('footer-text flex-left').text(dayMinHr);
+  let $footImgs = $("<span>").addClass('footer-imgs flex-right')
+      .html(
+        `<input class="img-submit flagTweet" type="image" src="/images/flag-tweet.png" />
+        <input class="img-submit retweet" type="image" src="/images/retweet.png" />
+        <input class="img-submit likeBtn" type="image" alt="submit" src="/images/heart-tweet.js.png" />`
+      );
 
   $($article).append($header, $body, $hr, $footer);
   $($header).append($avatar, $name, $username);
   $($footer).append($time, $footImgs);
 
   return $article;
+}
+
+
+function likeTweet(){
+  //object to store individual post boolean 
+  //**TODO: CHANGE TO USERID FROM COOKIES
+  
+  let liked = {};
+
+  $('#tweets-container').on('click', '.likeBtn', function() {
+
+    let parentTweet = $(this).parents('.tweet-article');
+    let targetID = parentTweet.find('.tweet-username').text();
+    console.log(targetID);
+
+    if(!liked[targetID]){
+      liked[targetID] = false;
+    }
+
+    liked[targetID] === false ? liked[targetID] = true : liked[targetID] = false;
+    
+    if(!parentTweet.data('likes')){
+      parentTweet.data('likes', 0);
+    }
+
+    let tweetData = parentTweet.data();
+
+    liked[targetID] === true ? tweetData.likes += 1 : tweetData.likes -= 1;
+
+    console.log(targetID, tweetData);
+
+    // $.ajax({ url: `/tweets?_method=PUT`, method: 'POST', data: content })
+  })
 }
 
 //render existing tweets from database on load/refresh
