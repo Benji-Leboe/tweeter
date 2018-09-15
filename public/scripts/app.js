@@ -66,7 +66,7 @@ function convertMilliseconds(ms) {
 function createTweetElement(tweetObject) {
   
   //object deconstructors
-  const { user, content, created_at } = tweetObject;
+  const { _id, user, content, created_at } = tweetObject;
 
   const { name, avatars, handle } = user;
 
@@ -101,6 +101,7 @@ function createTweetElement(tweetObject) {
   })();
 
   //dynamic HTML constructor
+  let $id = _id;
   let $article = $("<article>").addClass('tweet-article flex-box');
   let $header = $("<header>").addClass('tweet-header flex-container');
   let $avatar = $("<img>").addClass('tweet-img flex-left').attr("src", avatars.small);
@@ -120,6 +121,8 @@ function createTweetElement(tweetObject) {
   $($article).append($header, $body, $hr, $footer);
   $($header).append($avatar, $name, $username);
   $($footer).append($time, $footImgs);
+  
+  $article.data('postID', $id);
 
   return $article;
 }
@@ -135,25 +138,27 @@ function likeTweet(){
 
     let parentTweet = $(this).parents('.tweet-article');
     let targetID = parentTweet.find('.tweet-username').text();
-    console.log(targetID);
+    let tweetData = parentTweet.data();
+    let postID = tweetData.postID;
 
     if(!liked[targetID]){
       liked[targetID] = false;
     }
 
-    liked[targetID] === false ? liked[targetID] = true : liked[targetID] = false;
-    
     if(!parentTweet.data('likes')){
       parentTweet.data('likes', 0);
     }
 
-    let tweetData = parentTweet.data();
+
+    liked[targetID] === false ? liked[targetID] = true : liked[targetID] = false;
 
     liked[targetID] === true ? tweetData.likes += 1 : tweetData.likes -= 1;
 
-    console.log(targetID, tweetData);
+    let postLikes = tweetData.likes;
 
-    // $.ajax({ url: `/tweets?_method=PUT`, method: 'POST', data: content })
+    console.log(`User: ${targetID}; Post ID: ${postID}; Likes: ${postLikes}`);
+
+    // $.ajax({ url: `/tweets?_method=PUT`, method: 'POST', data: {} })
   })
 }
 

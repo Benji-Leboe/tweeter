@@ -63,6 +63,26 @@ module.exports = (DataHelpers) => {
 
   });
 
+  tweetsRoutes.put("/:id", (req, res) => {
+
+    if (!req.params.id) {
+      res.status(400).json({ error: 'No user ID' });
+      return;
+    }
+
+    DataHelpers.saveLikes(likedPost, (err) => {
+
+      if (err) {
+        res.status.json({ error: err.message });
+
+      } else {
+        res.status(201)
+
+      }
+    })
+
+  })
+
   //pass values to index.js
   return tweetsRoutes;
 }

@@ -24,6 +24,15 @@ module.exports = function makeDataHelpers(db) {
 
         cb(null, tweet);
       });
+    },
+
+    saveLikes: function (cb) {
+      db.collection('tweeter').insertOne(likeCount, (err) => {
+
+        if (err) throw err;
+
+        cb(null, true);
+      })
     }
 
   };
