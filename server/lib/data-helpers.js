@@ -30,12 +30,12 @@ module.exports = function makeDataHelpers(db) {
     },
 
     saveLikes: function (post_id, post_likes, cb) {
-      
-
-      db.collection('tweeter').findOneAndUpdate({'_id': ObjectId(post_id)},
-        {$set: {'likes': post_likes}},
+      db.collection('tweeter').findOneAndUpdate(
+        
+        { '_id': ObjectId(post_id) },
+        { $set: { 'likes': post_likes } },
         {
-          projection: {'_id': 1, 'likes': 1},
+          projection: { '_id': 1, 'likes': 1 },
           returnOriginal: false
         },
         (err, result) => {
@@ -46,7 +46,6 @@ module.exports = function makeDataHelpers(db) {
 
         cb(null, true);
       });
-
     }
 
   };

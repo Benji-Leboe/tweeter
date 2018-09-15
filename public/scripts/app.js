@@ -66,7 +66,7 @@ function convertMilliseconds(ms) {
 function createTweetElement(tweetObject) {
   
   //object deconstructors
-  const { _id, user, content, created_at } = tweetObject;
+  const { _id, user, content, created_at, likes } = tweetObject;
 
   const { name, avatars, handle } = user;
 
@@ -102,6 +102,7 @@ function createTweetElement(tweetObject) {
 
   //dynamic HTML constructor
   let $id = _id;
+  let $likes = likes;
   let $article = $("<article>").addClass('tweet-article flex-box');
   let $header = $("<header>").addClass('tweet-header flex-container');
   let $avatar = $("<img>").addClass('tweet-img flex-left').attr("src", avatars.small);
@@ -123,15 +124,16 @@ function createTweetElement(tweetObject) {
   $($footer).append($time, $footImgs);
   
   $article.data('postID', $id);
+  $article.data('likes', $likes);
 
   return $article;
 }
 
 
 function likeTweet(){
-  //object to store individual post boolean 
+   
   //**TODO: CHANGE TO USERID FROM COOKIES
-  
+  //object to store individual post boolean
   let liked = {};
 
   $('#tweets-container').on('click', '.likeBtn', function() {
@@ -139,26 +141,15 @@ function likeTweet(){
     let parentTweet = $(this).parents('.tweet-article');
     let targetID = parentTweet.find('.tweet-username').text();
     let tweetData = parentTweet.data();
-    let postID = tweetData.postID;
 
     if(!liked[targetID]){
       liked[targetID] = false;
-    }
-
-    if(!parentTweet.data('likes')){
-      parentTweet.data('likes', 0);
     }
 
 
     liked[targetID] === false ? liked[targetID] = true : liked[targetID] = false;
 
     liked[targetID] === true ? tweetData.likes += 1 : tweetData.likes -= 1;
-
-    let postLikes = tweetData.likes;
-
-    console.log(tweetData);
-
-    console.log(`User: ${targetID}; Post ID: ${postID}; Likes: ${postLikes}`);
 
     $.ajax({ 
       method: 'PUT', 
@@ -168,16 +159,12 @@ function likeTweet(){
       
     }).done(function() {
       console.log('success');
+
     }).fail( function() {
       console.log('error');
-    })
 
-    // $.ajax('/tweets').done(function() {
-    //   console.log('success');
-    // }).fail(function() {
-    //   console.log('error');
-    // })
-  })
+    });
+  });
 }
 
 //render existing tweets from database on load/refresh
@@ -264,7 +251,8 @@ function addTweet() {
 
       }).done(function() {
         //reset character counter
-        composer.siblings('.counter').val('').text(140);
+        composer.siblings('span.flex-row')
+        .children('.counter').val('').text(140);
         console.log('Post request successful');
       });
 

@@ -35,23 +35,6 @@ module.exports = (DataHelpers) => {
 
   });
 
-  // tweetsRoutes.get("/likes", (req, res) => {
-
-  //   DataHelpers.getTweets((err, tweets) => {
-
-  //     if (err) {
-  //       res.status(500).json({ error: err.message });
-
-  //     } else {
-        
-  //       console.log('success');
-        
-  //     }
-
-  //   });
-
-  // });
-
   //call saveTweet with callback
   tweetsRoutes.post("/", (req, res) => {
 
@@ -67,7 +50,8 @@ module.exports = (DataHelpers) => {
       content: {
         text: req.body.text
       },
-      created_at: Date.now()
+      created_at: Date.now(),
+      likes: 0
     };
 
     DataHelpers.saveTweet(tweet, (err) => {
