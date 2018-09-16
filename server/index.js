@@ -6,6 +6,8 @@ const PORT            = 8080;
 const express         = require("express");
 const bodyParser      = require("body-parser");
 const methodOverride  = require("method-override");
+const bcrypt          = require('bcrypt');
+const cookieSession   = require('cookie-session');
 const app             = express();
 const { MongoClient } = require("mongodb");
 const MONGODB_URI = "mongodb://localhost:27017/tweeter";
@@ -32,7 +34,7 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
 
   //origin for tweet function callbacks + routing
   const tweetsRoutes = require("./routes/tweets")(DataHelpers);
-
+  
   app.use("/tweets", tweetsRoutes);
   app.use("/tweets/likes", tweetsRoutes);
 

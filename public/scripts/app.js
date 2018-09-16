@@ -74,9 +74,9 @@ function likeMaker(likes){
   }
 }
 
-function updateLikes(){
+// function updateLikes(){
 
-}
+// }
 
 function createTweetElement(tweetObject) {
   
@@ -169,14 +169,13 @@ function likeTweet(){
     liked[targetID] === true ? tweetData.likes += 1 : tweetData.likes -= 1;
     
     let currentLikes = likeMaker(tweetData.likes);
-    console.log(typeof tweetData.likes);
     $.ajax({ 
       method: 'PUT', 
       url: '/tweets/likes',
       data: tweetData
       
-    }).done( function() {
-      $(this).parents('.tweet-article').find('.like-display').text(currentLikes);
+    }).then( function() {
+      parentTweet.find('p.like-display').val('').text(currentLikes);
 
     }).fail( function(err) {
       if (err) throw err;

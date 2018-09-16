@@ -87,9 +87,9 @@ module.exports = (DataHelpers) => {
         console.log('like successful!');
 
       }
-    })
+    });
 
-  })
+  });
 
   //pass values to index.js
   return tweetsRoutes;
