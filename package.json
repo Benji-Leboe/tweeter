@@ -1,6 +1,7 @@
 {
   "name": "tweeter",
   "version": "1.0.0",
+  "repository": "github:Benji-Leboe/tweeter",
   "description": "A twitter clone by Lighthouse Labs for web bootcamp students to learn front-end dev skillz",
   "main": "server/index.js",
   "scripts": {
@@ -14,19 +15,20 @@
   "author": "Lighthouse Labs && Benji Leboe",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^3.0.0",
-    "body-parser": "^1.15.2",
-    "chance": "^1.0.2",
-    "cookie-session": "^2.0.0-beta.3",
-    "express": "^4.13.4",
-    "md5": "^2.1.0",
-    "method-override": "^3.0.0",
-    "mongodb": "^2.2.36"
+    "bcrypt": "3.0.0",
+    "body-parser": "1.18.3",
+    "chance": "1.0.2",
+    "cookie-session": "2.0.0-beta.3",
+    "express": "4.16.3",
+    "md5": "2.1.0",
+    "method-override": "3.0.0",
+    "mongodb": "2.2.36"
   },
   "devDependencies": {
-    "nodemon": "^1.9.2"
+    "nodemon": "1.18.4"
   },
   "engines": {
-    "node": "^10.10.0"
+    "node": "10.10.0",
+    "npm": "6.4.1"
   }
 }
