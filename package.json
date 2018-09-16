@@ -23,7 +23,7 @@
     "express": "4.16.3",
     "md5": "2.1.0",
     "method-override": "3.0.0",
-    "mongodb": "2.2.36",
+    "mongodb": "2.2.36"
   },
   "devDependencies": {
     "nodemon": "1.18.4"
