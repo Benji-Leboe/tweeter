@@ -8,7 +8,7 @@ const cluster         = require('cluster');
 const PORT            = $.PORT;
 const express         = require("express");
 const bodyParser      = require("body-parser");
-const bcrypt          = require('bcrypt');
+const bcrypt          = require('bcryptjs');
 const cookieSession   = require('cookie-session');
 const app             = express();
 
