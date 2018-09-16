@@ -1,27 +1,34 @@
 "use strict";
 
+require('dotenv').config();
+
+const $               = process.env;
+
 const userHelper     = require("../lib/util/user-helper")
 
-const methodOverride = require("method-override");
 const bodyParser     = require("body-parser");
 const express        = require('express');
 const tweetsRoutes   = express.Router();
+const cookieSession  = require('cookie-session');
 
-// tweetsRoutes.use(methodOverride('X-HTTP-Method-Override'));
 tweetsRoutes.use(bodyParser.urlencoded({ extended: false }));
+tweetsRoutes.use(bodyParser.json());
+tweetsRoutes.use(cookieSession
+({
+  name: 'session',
+  keys: [$.KEY1, $.KEY2]
+}));
 
-// tweetsRoutes.use(methodOverride('X-HTTP-Method'));
-// tweetsRoutes.use(methodOverride('X-HTTP-Method-Override'));
-// tweetsRoutes.use(methodOverride('X-Method-Override'));
 
 //callbacks for database functions
 module.exports = (DataHelpers) => {
 
+  
   //call getTweets with callback
   tweetsRoutes.get("/", (req, res) => {
 
     DataHelpers.getTweets((err, tweets) => {
-
+      
       if (err) {
         res.status(500).json({ error: err.message });
 

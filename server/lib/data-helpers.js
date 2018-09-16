@@ -10,7 +10,7 @@ module.exports = function makeDataHelpers(db) {
   return {
 
     // Saves a tweet to `db`
-    saveTweet: function (newTweet, cb) {
+    saveTweet: (newTweet, cb) => {
       db.collection('tweeter').insertOne(newTweet, (err) => {
 
         if (err) throw err;
@@ -20,7 +20,7 @@ module.exports = function makeDataHelpers(db) {
     },
 
     // Get all tweets in `db`, sorted by newest first
-    getTweets: function (cb) {
+    getTweets: (cb) => {
       db.collection('tweeter').find().toArray( (err, tweet) => {
 
         if (err) throw err;
@@ -29,7 +29,7 @@ module.exports = function makeDataHelpers(db) {
       });
     },
 
-    saveLikes: function (post_id, post_likes, cb) {
+    saveLikes: (post_id, post_likes, cb) => {
       db.collection('tweeter').findOneAndUpdate(
         
         { '_id': ObjectId(post_id) },

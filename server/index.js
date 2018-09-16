@@ -1,28 +1,33 @@
 "use strict";
 
-// Basic express setup:
+//express setup and dependency config
+require('dotenv').config();
+
+const $               = process.env;
 const cluster         = require('cluster');
-const PORT            = 8080;
+const PORT            = $.PORT;
 const express         = require("express");
 const bodyParser      = require("body-parser");
-const methodOverride  = require("method-override");
 const bcrypt          = require('bcrypt');
 const cookieSession   = require('cookie-session');
 const app             = express();
-const { MongoClient } = require("mongodb");
-const MONGODB_URI = "mongodb://localhost:27017/tweeter";
 
-app.use(methodOverride('X-HTTP-Method'));
-app.use(methodOverride('X-HTTP-Method-Override'));
-app.use(methodOverride('X-Method-Override'));
+const { MongoClient } = require("mongodb");
+const MONGODB_URI     = $.MONGODB_URI;
+
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
+app.use(cookieSession({
+  name: 'session',
+  keys: [$.KEY1, $.KEY2]
+}));
 
 if (cluster.isMaster) {
 
-  const cpuCount = require('os').cpus().length;
+  const WORKERS = process.env.WEBB_CONCURRENCY || 1;
 
-  for (let i = 0; i < cpuCount; i += 1) {
+  for (let i = 0; i < WORKERS; i++) {
     cluster.fork();
   }
 
