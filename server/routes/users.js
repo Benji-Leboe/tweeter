@@ -1,12 +1,20 @@
 "use strict";
 
-const userHelper     = require("../lib/util/user-helper")
+require('dotenv').config();
+
+const $              = process.env;
+
 const bodyParser     = require("body-parser");
 const express        = require('express');
-const userRoutes   = express.Router();
-
+const userRoutes     = express.Router();
+const cookieSession  = require('cookie-session');
 
 userRoutes.use(bodyParser.urlencoded({ extended: false }));
+userRoutes.use(cookieSession({
+  name: 'session',
+  keys: [$.KEY1, $.KEY2]
+}));
+
 
 //callbacks for login/register functions
 module.exports = (DataHelpers) => {
@@ -25,17 +33,29 @@ module.exports = (DataHelpers) => {
       return;
     }
 
-    //create random user JSON template
-    const user = req.body.user ? req.body.user : userHelper.generateRandomUser();
-    const tweet = {
-      user: user,
-      content: {
-        text: req.body.text
-      },
-      created_at: Date.now(),
-      likes: 0
-    };
+    // //create random user JSON template
+    // const user = req.body.user ? req.body.user : userHelper.generateRandomUser();
+    // const tweet = {
+    //   user: user,
+    //   content: {
+    //     text: req.body.text
+    //   },
+    //   created_at: Date.now(),
+    //   likes: 0
+    // };
+
+
+    userRoutes.post('/register', (req, res) => {
+      let username = req.body.userReg;
+      let password = req.body.passwordReg;
+      let passwordCheck = req.body.passwordConfirm;
+
+      //WRTIE LOGIC TO QUERY EXISTING USERS FROM DB
+
+    });
 
   //pass values to index.js
-  return userRoutes;
+    return userRoutes;
+
+  });
 }

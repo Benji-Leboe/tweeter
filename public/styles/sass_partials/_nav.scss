@@ -24,9 +24,12 @@
     margin-left: 0.6rem;
   }
 
-  .compose-toggle {
+  .btn {
     @include button(2px, 0.6rem);
     color: $primary-color;
+    min-height: 3rem;
+    min-width: 6rem;
+    margin: 0.25rem;
     background-color: rgba(255, 255, 255, 0.7);
   
     &:hover {
@@ -36,6 +39,9 @@
     &:active {
       background-color: rgba(180, 215, 205, 1);
     }
+  }
+
+  .compose-toggle {
   
     .compose-btn-img {
       margin-right: 0.15rem;
@@ -51,6 +57,32 @@
     }
 
   }
+
+  .logged-out {
+    display: none;
+  }
+
+  .login-field {
+    display: none;
+
+    .login-form{
+      padding: 0rem;
+    }
+  }
+
+  .register-field {
+    display: none;
+
+    .register-form {
+      padding: 0rem;
+    }
+  }
+
+  .submit-btn {
+    max-height: 2rem;
+    max-width: 3rem;
+  }
+  
 }
 
 

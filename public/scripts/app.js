@@ -195,6 +195,7 @@ function renderTweets(tweetContent) {
   }).queue(function() {
     //conditional removing css "display: none" default for first child
     $('article.tweet-article').first()
+    .css("display", "flex").children('.like-display')
     .css("display", "flex");
     $(this).dequeue();
   });
@@ -205,10 +206,16 @@ function prependTweet(tweet) {
   $('#tweets-container').ready(function() {
     $(".tweets").prepend( createTweetElement(tweet) );
 
-  }).queue(function() {
+  }).queue(function(next) {
     //animate new tweet on submission
     $('article.tweet-article')
     .first().slideDown(500);
+    next();
+  }).queue(function() {
+    $('article.like-display').first()
+    .css('opacity', 0)
+    .fadeIn(600);
+    console.log(this);
     $(this).dequeue();
   });
 }

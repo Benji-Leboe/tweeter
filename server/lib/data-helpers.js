@@ -1,5 +1,7 @@
 "use strict";
 
+const bcrypt          = require('bcryptjs');
+
 // Defines helper functions for saving and getting tweets, using the database `db`
 module.exports = function makeDataHelpers(db) {
 
@@ -29,6 +31,7 @@ module.exports = function makeDataHelpers(db) {
       });
     },
 
+    //submit likes to db
     saveLikes: (post_id, post_likes, cb) => {
       db.collection('tweeter').findOneAndUpdate(
         
@@ -46,6 +49,28 @@ module.exports = function makeDataHelpers(db) {
 
         cb(null, true);
       });
+    },
+
+    //user registration/login helpers
+
+    setCookie: (req, option, param) => {
+      return req.session[option] = param;
+    },
+
+    passHasher: (password) => {
+      let salt = bcrypt.genSaltSync(10);
+      return bcrypt.hashSync(password, salt);
+    },
+
+    hashCheck: (password, hash) => {
+      return bcrypt.compareSync(password, hash);
+    },
+
+    isMinLength: (input, length) => {
+      if(input.length > length){
+        return true;
+      }
+      return false;
     }
 
   };

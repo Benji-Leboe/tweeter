@@ -68,6 +68,7 @@ form {
 /* tweet articles */ 
 
 article {
+  position: relative;
   margin: 2rem;
   border-color: rgba(88, 88, 88, 0.3);
   border-style: solid;
@@ -89,6 +90,7 @@ article {
 
   &:first-child {
     display: none;
+
   }
 
   .tweet-header {
@@ -126,9 +128,17 @@ article {
   }
 
   .like-display {
+    @include select(none);
+    position: absolute;
+    bottom: 40px; 
+    right: 0.5rem;
     padding: 0.5rem;
     font-size: 0.75rem;
     color: rgba(175, 175, 175, 0.7);
+
+    &:first-child {
+      @include select(none);
+    }
   }
   
   .tweet-footer {

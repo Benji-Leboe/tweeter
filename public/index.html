@@ -27,14 +27,53 @@
 
     <!-- Top nav bar (fixed) -->
     <nav id="nav-bar" class="flex-row">
+
       <span class="flex-row">
         <img class="logo flex-item" src="/images/bird.png">
         <span class="header flex-item">Tweeter</span>
       </span>
-      <button type="button" class="compose-toggle flex-row">
-        <img class="flex-item compose-btn-img" src="images/compose-pen.png">
-        <p class="flex-item compose-btn-text">Compose</p>
-      </button>
+
+      <!--HIDE THIS IF NOT LOGGED IN-->
+      <span class="flex-row logged-in">
+        <button type="button" id="composerToggle" class="btn compose-toggle flex-row">
+          <img class="flex-item compose-btn-img" src="images/compose-pen.png">
+          <p class="flex-item compose-btn-text">Compose</p>
+        </button>
+        <button type="button" id="logoutBtn" class="btn logout-btn">
+          Logout
+        </button>
+      </span>
+
+      <!--HIDE THIS IF LOGGED IN-->
+      <span class="flex-row logged-out">
+        <button type="button" id="registerBtn" class="btn register-btn">
+          Register
+        </button>
+        <button type="button" id="loginBtn" class="btn login-btn">
+          Login
+        </button>
+        <div class="dropdown">
+
+          <div class="login-field">
+            <form class="login-form" method="POST" action="/tweets/login">
+              <input type="text" id="userLogin" placeholder="Username">
+              <input type="password" id="passwordLogin" placeholder="Password">
+              <button type="submit" class="btn submit-btn">Go</button>
+            </form>
+          </div>
+
+          <div class="register-field">
+            <form class="register-form" method="POST" action="/tweets/register">
+                <input type="text" id="userReg" placeholder="Username">
+                <input type="password" id="passwordReg" placeholder="Password">
+                <input type="password" id="passwordConfirm" placeholder="Confirm Password">
+                <button type="submit" class="btn submit-btn">Go</button>
+            </form>
+          </div>
+          
+        </div>
+      </span>
+        
     </nav>
 
     <!-- Page-specific (main) content here -->
@@ -47,6 +86,7 @@
       <section class="new-tweet">
 
         <!-- new tweet composer-->
+        <!-- HIDE THIS IF NOT LOGGED IN -->
         <form id="compose-tweet" class="center-inline" method="POST" action="/tweets/">
           <h2>Compose a Tweet</h2>
           <hr class="compose-rule" />

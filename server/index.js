@@ -8,7 +8,6 @@ const cluster         = require('cluster');
 const PORT            = $.PORT;
 const express         = require("express");
 const bodyParser      = require("body-parser");
-const bcrypt          = require('bcryptjs');
 const cookieSession   = require('cookie-session');
 const app             = express();
 
@@ -57,9 +56,12 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
 
   //origin for tweet function callbacks + routing
   const tweetsRoutes = require("./routes/tweets")(DataHelpers);
-  
+  const userRoutes = require("./routes/users")(DataHelpers);
+
   app.use("/tweets", tweetsRoutes);
   app.use("/tweets/likes", tweetsRoutes);
+  app.use("/tweets/register", userRoutes);
+  app.use("/tweets/login", userRoutes);
 
 });
 
