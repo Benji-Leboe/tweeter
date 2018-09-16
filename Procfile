@@ -1,0 +1,1 @@
+web: ./node_modules/.bin/nodemon --watch server -e js server/index.js

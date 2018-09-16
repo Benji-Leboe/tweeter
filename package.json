@@ -8,9 +8,13 @@
     "start": "node server/index.js",
     "local": "./node_modules/.bin/nodemon --watch server -e js server/index.js"
   },
-  "author": "Lighthouse Labs",
+  "keywords": [
+    "heroku"
+  ],
+  "author": "Lighthouse Labs && Benji Leboe",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^3.0.0",
     "body-parser": "^1.15.2",
     "chance": "^1.0.2",
     "cookie-session": "^2.0.0-beta.3",
@@ -21,5 +25,8 @@
   },
   "devDependencies": {
     "nodemon": "^1.9.2"
+  },
+  "engines": {
+    "node": "^10.10.0"
   }
 }
