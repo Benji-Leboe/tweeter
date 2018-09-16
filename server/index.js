@@ -37,6 +37,7 @@ if (cluster.isMaster) {
 
 //connect to MongoDB and route modules
 MongoClient.connect(MONGODB_URI, (err, db) => {
+  console.log('Worker %d running:', cluster.worker.id);
 
   if (err) {
     console.error(`Failed to connect: ${MONGODB_URI}`);
@@ -58,7 +59,7 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
 });
 
 app.listen(PORT, () => {
-  console.log('Woker %d running:', cluster.worker.id)
+  console.log('Worker %d running:', cluster.worker.id);
   console.log("Example app listening on port " + PORT);
 });
 
