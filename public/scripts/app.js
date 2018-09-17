@@ -11,6 +11,7 @@ $(function() {
   showErrors();
   hideErrors();
   likeTweet();
+  postRegister();
   // loginCheck();
 });
 
@@ -82,6 +83,41 @@ function showRegister() {
     });
   });
 }
+
+function postLogin() {
+
+}
+
+function postRegister() {
+  $('.register-form').submit(function(event) {
+    event.preventDefault();
+    let formData = {
+      'username': $('input[id=userReg]').val(),
+      'handle': $('input[id=userHandle]').val(),
+      'password': $('input[id=passwordReg]').val(),
+      'passwordCheck': $('input[id=passwordConfirm]').val()
+    };
+
+    console.log(formData);
+    $.ajax({
+      url: '/tweets/register',
+      method: 'POST',
+      data: formData,
+      dataType: 'json',
+      success: function(data){
+        console.log("succes " + data);
+      },
+      error: function (req, status, error){
+        console.log("Req: " + req);
+        console.log("Status: " + status);
+        console.log("Error: " + error);
+      }
+    }).done(function (msg) {
+      console.log(msg);
+    })
+  })
+}
+
 
 function convertMilliseconds(ms) {
   

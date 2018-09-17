@@ -69,7 +69,7 @@ module.exports = function makeDataHelpers(db) {
     saveUser: (userDoc, cb) => {
       db.collection('users').insertOne(userDoc, (err) => {
         if (err) throw err;
-
+        console.log('user saved to DB');
         cb(null, true);
       });
 

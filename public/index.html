@@ -7,7 +7,7 @@
     <title>Tweeter - Home Page</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
-
+    <link rel="shortcut icon" href="">
     <!-- External CSS / normalize and font styles -->
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Condensed" />
@@ -56,16 +56,16 @@
         </button>
         <div class="dropdown">
 
-          <div class="login-field flex-row">
-            <form class="login-form" method="POST" action="/tweets/login">
+          <div id="login" class="login-field flex-row">
+            <form class="login-form" action="">
               <input type="text" id="userLogin" placeholder="Username">
               <input type="password" id="passwordLogin" placeholder="Password">
               <button type="submit" class="btn submit-btn">Go</button>
             </form>
           </div>
 
-          <div class="register-field flex-box">
-            <form class="register-form" method="POST" action="/tweets/register">
+          <div id="register" class="register-field flex-box">
+            <form class="register-form" action="">
                 <span class=flex-row>
                   <input type="text" id="userReg" placeholder="Name">
                   <input type="text" id="userHandle" placeholder="@handle">

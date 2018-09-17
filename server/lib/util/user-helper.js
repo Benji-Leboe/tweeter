@@ -2,8 +2,17 @@
 
 const Chance = require("chance");
 const chance = new Chance();
-
+const jdenticon = require('jdenticon');
+const fs = require('fs');
 const md5 = require('md5');
+
+function generateIcon(handle) {
+  let size = 200;
+  let value = `${handle}_icon`;
+  let png = jdenticon.toPng(value, size);
+
+  fs.writeFileSync(`../../../public/identicons/${handle}.png`, png);
+}
 
 module.exports = {
 
@@ -47,11 +56,9 @@ module.exports = {
       userHandle += handle.slice(1);
     }
 
-    const avatarUrlPrefix = `https://vanillicon.com/${md5(userHandle)}`;
+    const avatarUrlPrefix = `../../../public/identicons/${handle}.png`;
     const avatars = {
-      small:   `${avatarUrlPrefix}_50.png`,
-      regular: `${avatarUrlPrefix}.png`,
-      large:   `${avatarUrlPrefix}_200.png`
+      small:   `${avatarUrlPrefix}`
     }
 
     return {
