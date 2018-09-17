@@ -85,7 +85,28 @@ function showRegister() {
 }
 
 function postLogin() {
+  $('login-form').submit(function(event) {
+    event.preventDefault();
+    let formData = {
+      'username': $('input[id=userLogin]').val(),
+      'password': $('input[id=passwordLogin]').val()
+    }
 
+    $.ajax({
+      url: '/tweets/login',
+      method: 'POST',
+      data: formData,
+      success: function() {
+        $('.login-form input').val('');
+        $('.login-field').slideUp(300);
+      },
+      error: function (req, status, error){
+        console.log("Req: " + req);
+        console.log("Status: " + status);
+        console.log("Error: " + error);
+      }
+    });
+  });
 }
 
 function postRegister() {
@@ -103,7 +124,7 @@ function postRegister() {
       url: '/tweets/register',
       method: 'POST',
       data: formData,
-      success: function(data){
+      success: function() {
         $('.register-form input').val('');
         $('.register-field').slideUp(300);
       },
@@ -112,10 +133,8 @@ function postRegister() {
         console.log("Status: " + status);
         console.log("Error: " + error);
       }
-    }).done(function (msg) {
-      
-    })
-  })
+    });
+  });
 }
 
 
