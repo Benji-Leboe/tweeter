@@ -63,12 +63,12 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
   app.use("/tweets/register", userRoutes);
   app.use("/tweets/login", userRoutes);
 
-});
+  });
 
-app.listen(PORT, () => {
-  console.log('Worker %d running:', cluster.worker.id);
-  console.log("Example app listening on port " + PORT);
-});
+  app.listen(PORT, () => {
+    console.log('Worker %d running:', cluster.worker.id);
+    console.log("Example app listening on port " + PORT);
+  });
 
 }
 

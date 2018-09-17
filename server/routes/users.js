@@ -20,7 +20,10 @@ userRoutes.use(cookieSession({
 
 //callbacks for login/register functions
 module.exports = (DataHelpers) => {
-
+  userRoutes.get("/cookie", (req, res) => {
+    let cookie = req.session;
+    res.status(201).json(cookie);
+  }) 
   //call userLogin with callback
   userRoutes.post("/login", (req, res) => {
     let username = req.body.userLogin;
@@ -39,7 +42,7 @@ module.exports = (DataHelpers) => {
         console.log(user);
         if (DataHelpers.hashCheck(password, user.password)) {
           DataHelpers.setCookie(req, "user_id", user.id);
-          res.status(201).json({user});
+          res.status(201).json(user);
         } else {
           res.status(500).json({ err: 'Invalid username or password' });
           return;
@@ -76,6 +79,11 @@ module.exports = (DataHelpers) => {
     });
 
     DataHelpers.setCookie(req, "user_id", id);
+  });
+
+  userRoutes.post('/logout', (req, res) => {
+    req.session = null;
+    res.status(201).send();
   });
 
   //pass values to index.js

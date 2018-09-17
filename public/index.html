@@ -39,9 +39,11 @@
           <img class="flex-item compose-btn-img" src="images/compose-pen.png">
           <p class="flex-item compose-btn-text">Compose</p>
         </button>
-        <button type="button" id="logoutBtn" class="btn logout-btn">
-          Logout
-        </button>
+        <form class="logout-form" method="POST" action="/tweets/logout">
+          <button type="submit" id="logoutBtn" class="btn logout-btn">
+            Logout
+          </button>
+        </form>
       </span>
 
       <!--HIDE THIS IF LOGGED IN-->
