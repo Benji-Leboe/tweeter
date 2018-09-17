@@ -12,6 +12,7 @@ $(function() {
   hideErrors();
   likeTweet();
   postRegister();
+  postLogin();
   // loginCheck();
 });
 
@@ -85,7 +86,7 @@ function showRegister() {
 }
 
 function postLogin() {
-  $('login-form').submit(function(event) {
+  $('.login-form').submit(function(event) {
     event.preventDefault();
     let formData = {
       'username': $('input[id=userLogin]').val(),

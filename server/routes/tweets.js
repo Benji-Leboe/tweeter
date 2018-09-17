@@ -141,8 +141,8 @@ module.exports = (DataHelpers) => {
   });
 
   tweetsRoutes.post("/login", (req, res) => {
-    let username = req.body.userLogin;
-    let password = req.body.passwordLogin;
+    let username = req.body.username;
+    let password = req.body.password;
 
     if (!username || !password) {
       res.status(400).json({ error: 'Invalid request' });
