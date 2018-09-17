@@ -103,9 +103,8 @@ function postRegister() {
       url: '/tweets/register',
       method: 'POST',
       data: formData,
-      dataType: 'json',
       success: function(data){
-        console.log("succes " + data);
+        console.log("success " + data);
       },
       error: function (req, status, error){
         console.log("Req: " + req);

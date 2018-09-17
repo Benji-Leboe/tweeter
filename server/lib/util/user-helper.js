@@ -51,7 +51,7 @@ module.exports = {
   },
   generateUser: (id, userName, handle, passHash) => {
 
-    let userHandle = "@";
+    let userHandle = `@${handle}`;
     if (handle.slice(0,1) === "@"){
       userHandle += handle.slice(1);
     }
@@ -62,7 +62,7 @@ module.exports = {
     }
 
     return {
-      _id: id,
+      _id: id.$oid,
       name: userName,
       handle: userHandle,
       password: passHash,
