@@ -64,13 +64,15 @@ module.exports = function makeDataHelpers(db) {
 
     hashCheck: (password, hash) => {
       return bcrypt.compareSync(password, hash);
-    },
+    }, 
 
-    isMinLength: (input, length) => {
-      if(input.length > length){
-        return true;
-      }
-      return false;
+    saveUser: (userDoc, cb) => {
+      db.collection('users').insertOne(userDoc, (err) => {
+        if (err) throw err;
+
+        cb(null, true);
+      });
+
     }
 
   };

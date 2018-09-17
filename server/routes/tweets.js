@@ -4,7 +4,7 @@ require('dotenv').config();
 
 const $               = process.env;
 
-const userHelper     = require("../lib/util/user-helper")
+const userHelper     = require("../lib/util/user-helper");
 
 const bodyParser     = require("body-parser");
 const express        = require('express');

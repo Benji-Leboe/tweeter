@@ -39,5 +39,28 @@ module.exports = {
       handle: userHandle,
       avatars: avatars
     };
+  },
+  generateUser: (id, userName, handle, passHash) => {
+
+    let userHandle = "@";
+    if (handle.slice(0,1) === "@"){
+      userHandle += handle.slice(1);
+    }
+
+    const avatarUrlPrefix = `https://vanillicon.com/${md5(userHandle)}`;
+    const avatars = {
+      small:   `${avatarUrlPrefix}_50.png`,
+      regular: `${avatarUrlPrefix}.png`,
+      large:   `${avatarUrlPrefix}_200.png`
+    }
+
+    return {
+      _id: id,
+      name: userName,
+      handle: userHandle,
+      password: passHash,
+      avatars: avatars
+    };
+
   }
 };
