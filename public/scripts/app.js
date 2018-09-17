@@ -104,7 +104,8 @@ function postRegister() {
       method: 'POST',
       data: formData,
       success: function(data){
-        console.log("success " + data);
+        $('.register-form input').val('');
+        $('.register-field').slideUp(300);
       },
       error: function (req, status, error){
         console.log("Req: " + req);
@@ -112,7 +113,7 @@ function postRegister() {
         console.log("Error: " + error);
       }
     }).done(function (msg) {
-      console.log(msg);
+      
     })
   })
 }
