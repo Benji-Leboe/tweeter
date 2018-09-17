@@ -56,7 +56,7 @@
         </button>
         <div class="dropdown">
 
-          <div class="login-field">
+          <div class="login-field flex-row">
             <form class="login-form" method="POST" action="/tweets/login">
               <input type="text" id="userLogin" placeholder="Username">
               <input type="password" id="passwordLogin" placeholder="Password">
@@ -64,12 +64,16 @@
             </form>
           </div>
 
-          <div class="register-field">
+          <div class="register-field flex-box">
             <form class="register-form" method="POST" action="/tweets/register">
-                <input type="text" id="userReg" placeholder="Name">
-                <input type="text" id="userHandle" placeholder="@handle">
-                <input type="password" id="passwordReg" placeholder="Password">
-                <input type="password" id="passwordConfirm" placeholder="Confirm Password">
+                <span class=flex-row>
+                  <input type="text" id="userReg" placeholder="Name">
+                  <input type="text" id="userHandle" placeholder="@handle">
+                </span>
+                <span class="flex-row">
+                  <input type="password" id="passwordReg" placeholder="Password">
+                  <input type="password" id="passwordConfirm" placeholder="Confirm Password">
+                </span>
                 <button type="submit" class="btn submit-btn">Go</button>
             </form>
           </div>

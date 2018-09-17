@@ -58,30 +58,54 @@
 
   }
 
+  .dropdown {
+    position: absolute;
+    display: block;
+    top: 80px;
+    right: 0rem;
+    margin: 0rem;
+
+    .login-field {
+      display: none;
+  
+      .login-form{
+        padding: 0rem;
+        margin: 0rem;
+
+        
+      }
+    }
+
+    .register-field {
+      display: none;
+  
+      .register-form {
+        padding: 0rem;
+
+        .submit-btn {
+          margin: 1rem;
+          padding: 0.3rem 0.5rem 1rem 0.5rem;
+          min-height: 0rem;
+          min-width: 0rem;
+          max-height: 2rem;
+          max-width: 3rem;
+
+        }
+      }
+    }
+  }
+
   .logged-out {
+    display: flex;
+  }
+
+  .logged-in {
     display: none;
   }
 
-  .login-field {
-    display: none;
 
-    .login-form{
-      padding: 0rem;
-    }
-  }
 
-  .register-field {
-    display: none;
-
-    .register-form {
-      padding: 0rem;
-    }
-  }
-
-  .submit-btn {
-    max-height: 2rem;
-    max-width: 3rem;
-  }
+  
   
 }
 

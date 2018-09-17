@@ -52,13 +52,38 @@
   margin: 0.15rem;
   padding: 0.1rem;
 }
+#nav-bar .dropdown {
+  position: absolute;
+  display: block;
+  top: 80px;
+  right: 0rem;
+  margin: 0rem;
+}
+#nav-bar .dropdown .login-field {
+  display: none;
+}
+#nav-bar .dropdown .login-field .login-form {
+  padding: 0rem;
+  margin: 0rem;
+}
+#nav-bar .dropdown .register-field {
+  display: none;
+}
+#nav-bar .dropdown .register-field .register-form {
+  padding: 0rem;
+}
+#nav-bar .dropdown .register-field .register-form .submit-btn {
+  margin: 1rem;
+  padding: 0.3rem 0.5rem 1rem 0.5rem;
+  min-height: 0rem;
+  min-width: 0rem;
+  max-height: 2rem;
+  max-width: 3rem;
+}
 #nav-bar .logged-out {
-  display: none;
+  display: flex;
 }
-#nav-bar .login-field {
-  display: none;
-}
-#nav-bar .register-field {
+#nav-bar .logged-in {
   display: none;
 }
 

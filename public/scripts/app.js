@@ -4,11 +4,14 @@
 $(function() {
   composerCount();
   composerToggleBtn();
+  showLogin();
+  showRegister();
   getTweets();
   addTweet();
   showErrors();
   hideErrors();
   likeTweet();
+  // loginCheck();
 });
 
 //show/hide errors for addTweet conditionals
@@ -50,6 +53,36 @@ function composerToggleBtn() {
   });
 }
 
+function showLogin() {
+  $('#loginBtn').click(function(event) {
+    event.preventDefault();
+    $('.register-field').css("display", "none");
+
+    $('.login-field').slideToggle(500, function() {
+
+      let styleCheck = $('.dropdown').css("display");
+      if (styleCheck === "block") {
+        $('#userLogin').focus();
+      }
+    });
+  });
+}
+
+function showRegister() {
+  $('#registerBtn').click(function(event) {
+    event.preventDefault();
+    $('.login-field').css("display", "none");
+
+    $('.register-field').slideToggle(500, function() {
+
+      let styleCheck = $('.dropdown').css("display");
+      if (styleCheck === "block") {
+        $('#userReg').focus();
+      }
+    });
+  });
+}
+
 function convertMilliseconds(ms) {
   
   let sec = Math.floor(ms / 1000);
@@ -73,10 +106,6 @@ function likeMaker(likes){
     return `${liked} people like this.`;
   }
 }
-
-// function updateLikes(){
-
-// }
 
 function createTweetElement(tweetObject) {
   
@@ -282,4 +311,31 @@ function addTweet() {
 
     }
   });
+}
+
+function getCookie() {
+  $.ajax('tweets/cookie', {
+    method: 'GET'
+  }).done(function(cookie) {
+    return cookie;
+  });
+}
+
+function cookieResponse(cookie, param) {
+  if (cookie !== null){
+    return cookie[param];
+  }
+  return null;
+}
+
+function loginCheck() {
+  let cookie = getCookie();
+  
+  if (!cookie) {
+    $('#nav-bar .logged-in').css('display', 'none');
+    $('#nav-bar .logged-out').css('display', 'flex');
+  } else {
+    $('#nav-bar .logged-out').css('display', 'none');
+    $('#nav-bar .logged-in').css('display', 'flex');
+  }
 }

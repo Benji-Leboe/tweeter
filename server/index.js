@@ -62,6 +62,7 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
   app.use("/tweets/likes", tweetsRoutes);
   app.use("/tweets/register", userRoutes);
   app.use("/tweets/login", userRoutes);
+  app.use("/tweets/cookie", userRoutes);
 
   });
 
