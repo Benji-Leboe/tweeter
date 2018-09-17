@@ -9,7 +9,7 @@ const bodyParser     = require("body-parser");
 const express        = require('express');
 const userRoutes     = express.Router();
 const cookieSession  = require('cookie-session');
-const ObjectId = require('mongodb').ObjectID;
+const ObjectId       = require('mongodb').ObjectID;
 
 userRoutes.use(bodyParser.urlencoded({ extended: false }));
 userRoutes.use(cookieSession({
@@ -21,30 +21,33 @@ userRoutes.use(cookieSession({
 //callbacks for login/register functions
 module.exports = (DataHelpers) => {
 
-  //call getTweets with callback
-  userRoutes.get("/login", (req, res) => {
-
-
-  });
-
-  //call saveTweet with callback
+  //call userLogin with callback
   userRoutes.post("/login", (req, res) => {
+    let username = req.body.userLogin;
+    let password = req.body.passwordLogin;
 
-    if (!req.body.text) {
-      res.status(400).json({ error: 'invalid request' });
+    if (!username || !password) {
+      res.status(400).json({ error: 'Invalid request' });
       return;
     }
 
-    // //create random user JSON template
-    // const user = req.body.user ? req.body.user : userHelper.generateRandomUser();
-    // const tweet = {
-    //   user: user,
-    //   content: {
-    //     text: req.body.text
-    //   },
-    //   created_at: Date.now(),
-    //   likes: 0
-    // };
+    DataHelpers.getUser(username, (err, user) => {
+      if (err) {
+        res.status(500).json({ err: err.message });
+
+      } else {
+        console.log(user);
+        if (DataHelpers.hashCheck(password, user.password)) {
+          DataHelpers.setCookie(req, "user_id", user.id);
+          res.status(201).json({user});
+        } else {
+          res.status(500).json({ err: 'Invalid username or password' });
+          return;
+        }
+      }
+    });
+
+    
   });
 
   userRoutes.post('/register', (req, res) => {
@@ -67,6 +70,8 @@ module.exports = (DataHelpers) => {
         res.status(500).json({ err: err.message });
       } else {
         res.status(201).send();
+        console.log(userDoc);
+        console.log("Registration success!");
       }
     });
 

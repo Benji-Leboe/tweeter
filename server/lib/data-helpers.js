@@ -73,6 +73,14 @@ module.exports = function makeDataHelpers(db) {
         cb(null, true);
       });
 
+    },
+
+    getUser: (username, cb) => {
+      db.collection('users').findOne({'name': username}, (err, result) => {
+        if (err) throw err;
+
+        cb(null, result);
+      })
     }
 
   };
