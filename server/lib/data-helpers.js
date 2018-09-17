@@ -76,10 +76,18 @@ module.exports = function makeDataHelpers(db) {
     },
 
     getUser: (username, cb) => {
-      db.collection('users').findOne({'name': username}, (err, result) => {
+      db.collection('users').findOne({'name': username}, (err, user) => {
+        if (err) throw err;
+        
+        cb(null, user);
+      })
+    },
+
+    getUsers: (cb) => {
+      db.collection('users').find().toArray( (err, users) => {
         if (err) throw err;
 
-        cb(null, result);
+        cb(null, users);
       })
     }
 

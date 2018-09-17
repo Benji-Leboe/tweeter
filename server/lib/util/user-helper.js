@@ -49,12 +49,13 @@ module.exports = {
       avatars: avatars
     };
   },
-  generateUser: (id, userName, handle, passHash) => {
+  generateUser: (oid, userName, handle, passHash) => {
 
     let userHandle = `@${handle}`;
     if (handle.slice(0,1) === "@"){
       userHandle += handle.slice(1);
     }
+    generateIcon(handle);
 
     const avatarUrlPrefix = `../../../public/identicons/${handle}.png`;
     const avatars = {
@@ -62,7 +63,7 @@ module.exports = {
     }
 
     return {
-      _id: id.$oid,
+      _id: oid,
       name: userName,
       handle: userHandle,
       password: passHash,

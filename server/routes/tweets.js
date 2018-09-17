@@ -103,19 +103,31 @@ module.exports = (DataHelpers) => {
   //user db routes
 
   tweetsRoutes.get("/cookie", (req, res) => {
-    let cookie = req.session;
-    res.status(201).json(cookie);
+    let userId = req.session.user_id;
+    console.log("Get user ID:", userId);
+    res.status(201).json(userId);
   });
 
   tweetsRoutes.get('/users', (req, res) => {
     //GET USERS FROM DB;
+    DataHelpers.getUsers( (err, users) => {
+
+      if (err) {
+        res.status(500).json({ err: err.message });
+
+      } else {
+        res.status(201).json(users);
+
+      }
+    });
   });
 
   tweetsRoutes.post('/register', (req, res) => {
     console.log('request received');
-    console.log(req.body);
+    console.log("Request body:", req.body);
 
     let id = ObjectId();
+    let oid = id.$oid;
     let { username, handle, password, passwordCheck } = req.body;
 
     
@@ -125,19 +137,19 @@ module.exports = (DataHelpers) => {
     }
     //WRITE LOGIC TO QUERY EXISTING USERS FROM DB
     let hashedPass = DataHelpers.passHasher(password);
-    let userDoc = userHelper.generateUser(id, username, handle, hashedPass);
+    let userDoc = userHelper.generateUser(oid, username, handle, hashedPass);
 
     DataHelpers.saveUser(userDoc, (err) => {
       if (err) {
         res.status(500).json({ err: err.message });
       } else {
         res.status(201).send();
-        console.log(userDoc);
+        console.log("User doc:", userDoc);
         console.log("Registration success!");
       }
     });
 
-    DataHelpers.setCookie(req, "user_id", id);
+    DataHelpers.setCookie(req, "user_id", oid);
   });
 
   tweetsRoutes.post("/login", (req, res) => {
@@ -154,9 +166,12 @@ module.exports = (DataHelpers) => {
         res.status(500).json({ err: err.message });
 
       } else {
-        console.log(user);
+        console.log("User:", user);
         if (DataHelpers.hashCheck(password, user.password)) {
-          DataHelpers.setCookie(req, "user_id", user.id);
+          console.log("UserId:", user._id);
+          DataHelpers.setCookie(req, "user_id", user._id);
+          
+          console.log("Session:", req.session);
           res.status(201).json(user);
         } else {
           res.status(500).json({ err: 'Invalid username or password' });
@@ -168,8 +183,9 @@ module.exports = (DataHelpers) => {
   });
 
   tweetsRoutes.post('/logout', (req, res) => {
-    req.session = null;
-    res.status(201).send();
+    let nosesh = req.session = null;
+    console.log("Session logged out:", req.session);
+    res.status(201).send(nosesh);
   });
 
   //pass values to index.js

@@ -95,6 +95,14 @@
     }
   }
 
+  .logout-form {
+    padding: 0rem;
+    margin: 0rem;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
   .logged-out {
     display: flex;
   }
@@ -103,10 +111,6 @@
     display: none;
   }
 
-
-
-  
-  
 }
 
 

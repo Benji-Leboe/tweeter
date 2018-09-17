@@ -13,6 +13,8 @@ $(function() {
   likeTweet();
   postRegister();
   postLogin();
+  logout();
+  setUserId();
   // loginCheck();
 });
 
@@ -52,6 +54,15 @@ function composerToggleBtn() {
         $('#composer').focus();
       }
     });
+  });
+}
+
+function setUserId() {
+  $.ajax('/tweets/cookie', {
+    method: 'GET'
+  }).done(function(userId) {
+    $('html').data("user_id", userId);
+    console.log("HTML header data:", $('html').data());
   });
 }
 
@@ -100,6 +111,9 @@ function postLogin() {
       success: function() {
         $('.login-form input').val('');
         $('.login-field').slideUp(300);
+        $('.logged-out').css("display", "none");
+        $('.logged-in').css("display", "flex");
+        setUserId();
       },
       error: function (req, status, error){
         console.log("Req: " + req);
@@ -128,6 +142,7 @@ function postRegister() {
       success: function() {
         $('.register-form input').val('');
         $('.register-field').slideUp(300);
+        setUserId();
       },
       error: function (req, status, error){
         console.log("Req: " + req);
@@ -138,6 +153,21 @@ function postRegister() {
   });
 }
 
+function logout() {
+  $('.logout-form').submit(function(event) {
+    event.preventDefault();
+    $.ajax({
+      url: '/tweets/logout',
+      method: 'POST',
+      success: function() {
+        console.log("logout triggered");
+        $('.logged-out').css("display", "flex");
+        $('.logged-in').css("display", "none");
+        $('html').removeData();
+      }
+    })
+  })
+}
 
 function convertMilliseconds(ms) {
   
@@ -369,25 +399,12 @@ function addTweet() {
   });
 }
 
-function getCookie() {
-  $.ajax('tweets/cookie', {
-    method: 'GET'
-  }).done(function(cookie) {
-    return cookie;
-  });
-}
 
-function cookieResponse(cookie, param) {
-  if (cookie !== null){
-    return cookie[param];
-  }
-  return null;
-}
 
 function loginCheck() {
-  let cookie = getCookie();
+  let id = $html.data('user_id');
   
-  if (!cookie) {
+  if (!id) {
     $('#nav-bar .logged-in').css('display', 'none');
     $('#nav-bar .logged-out').css('display', 'flex');
   } else {
