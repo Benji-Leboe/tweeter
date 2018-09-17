@@ -56,13 +56,12 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
 
   //origin for tweet function callbacks + routing
   const tweetsRoutes = require("./routes/tweets")(DataHelpers);
-  const userRoutes = require("./routes/users")(DataHelpers);
 
   app.use("/tweets", tweetsRoutes);
   app.use("/tweets/likes", tweetsRoutes);
   app.use("/tweets/register", tweetsRoutes);
-  app.use("/users/login", userRoutes);
-  app.use("/users/cookie", userRoutes);
+  app.use("/tweets/login", tweetsRoutes);
+  app.use("/tweets/cookie", tweetsRoutes);
 
   });
 
