@@ -260,7 +260,6 @@ function createTweetElement(tweetObject) {
   return $article;
 }
 
-<img src="http://whatever-url.com"></img>
 function likeTweet(){
    
   //**TODO** CHANGE TO USERID FROM COOKIES
