@@ -8,8 +8,10 @@ This version of Tweeter was created by Benji Leboe for week 3 at Lighthouse Labs
 
 1. Fork this repository, then clone your fork of this repository.
 2. Install dependencies using the `npm install` command.
-3. Start the web server using the `npm run local` command. The app will be served at <http://localhost:8080/>.
-4. Go to <http://localhost:8080/> in your browser.
+3. .env.example file included with local mongoDB- real DB is hosted on private mLab cloud servers.
+    Use example env file and remove '.example' to use with dotenv to configure keys and MONGO_URI.
+4. Start the web server using the `npm run local` command. The app will be served at <http://localhost:8080/>.
+5. Go to <http://localhost:8080/> in your browser.
 
 ## Dependencies
 
@@ -19,6 +21,7 @@ This version of Tweeter was created by Benji Leboe for week 3 at Lighthouse Labs
 - chance
 - md5
 - mongodb
+- dotenv
 
 ## Overview
 
